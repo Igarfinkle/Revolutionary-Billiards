@@ -1,0 +1,2980 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    131498,       2971]
+NotebookOptionsPosition[    131249,       2958]
+NotebookOutlinePosition[    131595,       2973]
+CellTagsIndexPosition[    131552,       2970]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Gives", " ", "the", " ", "geodesic", " ", "with", " ", "starting", " ", 
+     "coordinates", " ", "u0"}], ",", 
+    RowBox[{
+     RowBox[{"v0", " ", "at", " ", "t"}], "=", 
+     RowBox[{"0", " ", "and", " ", "angle", " ", 
+      RowBox[{"\[Theta]", "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"geodesicSolve", "[", 
+      RowBox[{"u0_", ",", "v0_", ",", "\[Theta]_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"NDSolve", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"u", "''"}], "[", "t", "]"}], "+", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"2", "*", 
+                RowBox[{"f", "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"D", "[", 
+                   RowBox[{
+                    RowBox[{"f", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                  RowBox[{"v", "\[Rule]", 
+                   RowBox[{"v", "[", "t", "]"}]}]}], ")"}]}], ")"}], "/", 
+              RowBox[{
+               RowBox[{"f", "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "^", "2"}]}], " ", "*", 
+             " ", 
+             RowBox[{
+              RowBox[{"u", "'"}], "[", "t", "]"}], 
+             RowBox[{
+              RowBox[{"v", "'"}], "[", "t", "]"}]}]}], " ", "\[Equal]", "0"}],
+           ",", " ", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"v", "''"}], "[", "t", "]"}], "-", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"f", "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"D", "[", 
+                   RowBox[{
+                    RowBox[{"f", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                  RowBox[{"v", "\[Rule]", 
+                   RowBox[{"v", "[", "t", "]"}]}]}], ")"}]}], ")"}], "/", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"f", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}], "^", "2"}], " ", 
+                "+", " ", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"g", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}], "^", "2"}]}], 
+               ")"}]}], 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"u", "'"}], "[", "t", "]"}], ")"}], "^", "2"}]}], " ",
+             "+", " ", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"f", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"f", "[", "v", "]"}], ",", "v", ",", "v"}], "]"}],
+                    "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}]}], "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"g", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"g", "[", "v", "]"}], ",", "v", ",", "v"}], "]"}],
+                    "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}]}]}], ")"}], "/", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"f", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}], "^", "2"}], " ", 
+                "+", " ", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"D", "[", 
+                    RowBox[{
+                    RowBox[{"g", "[", "v", "]"}], ",", "v"}], "]"}], "/.", 
+                   RowBox[{"v", "\[Rule]", 
+                    RowBox[{"v", "[", "t", "]"}]}]}], ")"}], "^", "2"}]}], 
+               ")"}]}], " ", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "'"}], "[", "t", "]"}], ")"}], "^", "2"}]}]}], 
+           " ", "\[Equal]", "0"}], ",", " ", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"u", "[", "0", "]"}], "\[Equal]", "u0"}], ",", " ", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"u", "'"}], "[", "0", "]"}], "\[Equal]", 
+           RowBox[{
+            RowBox[{"Cos", "[", "\[Theta]", "]"}], "/", 
+            RowBox[{"f", "[", 
+             RowBox[{"v", "[", "0", "]"}], "]"}]}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"v", "[", "0", "]"}], "\[Equal]", "v0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"v", "'"}], "[", "0", "]"}], "\[Equal]", " ", 
+           RowBox[{
+            RowBox[{"Sin", "[", "\[Theta]", "]"}], "/", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"f", "'"}], "[", 
+                RowBox[{"v", "[", "0", "]"}], "]"}], "^", "2"}], "+", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"g", "'"}], "[", 
+                RowBox[{"v", "[", "0", "]"}], "]"}], "^", "2"}]}], 
+             "]"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"u", ",", "v"}], "}"}], ",", "  ", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", 
+          RowBox[{"-", "100"}], ",", " ", "100"}], "}"}]}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Gives", " ", "the", " ", "equation", " ", "for", " ", "a", " ", 
+     "parallel", " ", "on", " ", "the", " ", "SoR", " ", "with", " ", "given",
+      " ", "height", " ", "and", " ", "starting", " ", 
+     RowBox[{"angle", ".", " ", "The"}], " ", "curve", " ", "will", " ", 
+     "have", " ", "unit", " ", "speed"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getParallel", "[", 
+     RowBox[{"height_", ",", " ", "startingAngle_"}], "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"u", " ", "\[Rule]", " ", 
+       RowBox[{"Function", "[", 
+        RowBox[{"t", ",", 
+         RowBox[{
+          RowBox[{"t", "/", 
+           RowBox[{"(", 
+            RowBox[{"f", "[", "height", "]"}], ")"}]}], "+", 
+          "startingAngle"}]}], "]"}]}], ",", 
+      RowBox[{"v", " ", "\[Rule]", " ", 
+       RowBox[{"Function", "[", 
+        RowBox[{"t", ",", "height"}], "]"}]}]}], "}"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Due", " ", "to", " ", "slight", " ", "errors", " ", "in", " ", 
+      "machine", " ", "precision"}], ",", " ", 
+     RowBox[{"some", " ", "numbers", " ", "slightly", " ", 
+      RowBox[{"outside", " ", "[", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "1"}], "]"}], " ", "may", " ", "need", " ", 
+      "to", " ", "be", " ", "adjusted", " ", "to", " ", "within", " ", 
+      "those", " ", "bounds", " ", "so", " ", "that", " ", "inverse", " ", 
+      "trig", " ", "functions", " ", "with", " ", "those", " ", "values", " ",
+       "do", " ", "not", " ", "produce", " ", "complex", " ", "outputs", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"see", " ", "below"}], ")"}], "."}]}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sanitize", "[", "x_", "]"}], ":=", 
+    RowBox[{"Piecewise", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", 
+          RowBox[{"x", ">", "1"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", 
+          RowBox[{"x", "<", 
+           RowBox[{"-", "1"}]}]}], "}"}]}], "}"}], ",", "x"}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Gives", " ", "angle", " ", "mod", " ", "2", "Pi", " ", "from", " ", 
+     "Sine", " ", "and", " ", "Cosine"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getAngleFromCartesianCoords", "[", 
+     RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+    RowBox[{"Piecewise", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ArcCos", "[", 
+          RowBox[{"sanitize", "[", 
+           RowBox[{"x", "/", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{"x", "^", "2"}], "+", 
+              RowBox[{"y", "^", "2"}]}], "]"}]}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"ArcSin", "[", 
+           RowBox[{"sanitize", "[", 
+            RowBox[{"y", "/", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"x", "^", "2"}], "+", 
+               RowBox[{"y", "^", "2"}]}], "]"}]}], "]"}], "]"}], ">=", 
+          "0"}]}], "}"}], "}"}], ",", 
+      RowBox[{"-", 
+       RowBox[{"ArcCos", "[", 
+        RowBox[{"sanitize", "[", 
+         RowBox[{"x", "/", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"x", "^", "2"}], "+", 
+            RowBox[{"y", "^", "2"}]}], "]"}]}], "]"}], "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "If", " ", "you", " ", "need", " ", "to", " ", "specify", " ", "where", 
+      " ", "the", " ", "program", " ", "should", " ", "start", " ", "looking",
+       " ", "for", " ", "such", " ", "an", " ", "intersect", " ", 
+      RowBox[{"(", 
+       RowBox[{
+       "since", " ", "it", " ", "is", " ", "found", " ", "by", " ", 
+        "approximation"}], ")"}]}], ",", " ", 
+     RowBox[{"you", " ", "can", " ", "do", " ", "that", " ", "too"}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Known", " ", 
+      RowBox[{"problem", ":", " ", 
+       RowBox[{
+       "We", " ", "should", " ", "want", " ", "that", " ", "the", " ", "u", 
+        " ", "values", " ", "are", " ", "equal", " ", "mod", " ", "2", 
+        "Pi"}]}]}], ",", " ", 
+     RowBox[{
+     "but", " ", "adding", " ", "this", " ", "condition", " ", "causes", " ", 
+      "problems", " ", "somehow"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getIntersect", "[", 
+     RowBox[{"c1_", ",", "c2_", ",", "guess1_", ",", " ", "guess2_"}], "]"}], 
+    ":=", 
+    RowBox[{"FindRoot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"u", "[", "t", "]"}], "/.", "c1"}], ")"}], "\[Equal]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"u", "[", "t2", "]"}], "/.", "c2"}], ")"}]}], ",", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"v", "[", "t", "]"}], "/.", "c1"}], ")"}], "\[Equal]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"v", "[", "t2", "]"}], "/.", "c2"}], ")"}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"t", ",", "guess1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t2", ",", "guess2"}], "}"}]}], "}"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Angle", " ", "of", " ", "curve", " ", "to", " ", "parallel", " ", "at", 
+     " ", "given", " ", "point"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getAngleFromCurve", "[", 
+     RowBox[{"curve_", ",", "t_"}], "]"}], ":=", 
+    RowBox[{"getAngleFromCartesianCoords", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"u", "'"}], "[", "t", "]"}], "/.", "curve"}], ")"}], "*", 
+       RowBox[{"f", "[", 
+        RowBox[{
+         RowBox[{"v", "[", "t", "]"}], "/.", "curve"}], "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "'"}], "[", "t", "]"}], "/.", "curve"}], ")"}], "*", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"f", "'"}], "[", 
+            RowBox[{
+             RowBox[{"v", "[", "t", "]"}], "/.", "curve"}], "]"}], ")"}], "^",
+           "2"}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"g", "'"}], "[", 
+            RowBox[{
+             RowBox[{"v", "[", "t", "]"}], "/.", "curve"}], "]"}], ")"}], "^",
+           "2"}]}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Given", " ", "a", " ", "trajectory"}], ",", " ", 
+     RowBox[{"a", " ", "boundary"}], ",", " ", 
+     RowBox[{"and", " ", "the", " ", "intersect", " ", 
+      RowBox[{"(", 
+       RowBox[{"previously", " ", "calculated"}], ")"}], " ", "where", " ", 
+      "the", " ", "two", " ", "curves", " ", "meet"}], ",", " ", 
+     RowBox[{
+     "this", " ", "gives", " ", "the", " ", "next", " ", "trajectory", " ", 
+      "after", " ", "reflection"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getNextTrajectory", "[", 
+     RowBox[{"curve_", ",", "boundary_", ",", "intersect_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", " ", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"t1", ",", "tb", ",", "fv", ",", "sp", ",", "v0", ",", "u0"}], 
+       "}"}], ",", 
+      RowBox[{
+       RowBox[{"t1", "=", 
+        RowBox[{"t", "/.", 
+         RowBox[{"intersect", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+       RowBox[{"tb", "=", 
+        RowBox[{"t2", "/.", 
+         RowBox[{"intersect", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"v0", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"v", "[", "t1", "]"}], "/.", "curve"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"fv", "=", 
+        RowBox[{"f", "[", "v0", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"sp", "=", 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"f", "'"}], "[", "v0", "]"}], ")"}], "^", "2"}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"g", "'"}], "[", "v0", "]"}], ")"}], "^", "2"}]}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", 
+        RowBox[{"geodesicSolve", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"u", "[", "t1", "]"}], "/.", "curve"}], ",", 
+          RowBox[{
+           RowBox[{"v", "[", "t1", "]"}], "/.", "curve"}], ",", 
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{"getAngleFromCurve", "[", 
+             RowBox[{"curve", ",", "t1"}], "]"}]}], "+", 
+           RowBox[{"2", 
+            RowBox[{"getAngleFromCurve", "[", 
+             RowBox[{"boundary", ",", "tb"}], "]"}]}]}]}], "]"}], "]"}]}]}], 
+     "]"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Returns", " ", "plot", " ", "of", " ", "curve", " ", "with", " ", 
+      "given", " ", "length"}], ",", " ", "thickness", ",", " ", 
+     RowBox[{"and", " ", "color"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getPlot", "[", 
+     RowBox[{
+     "curve_", ",", " ", "length_", ",", " ", "thickness_", ",", " ", 
+      "color_"}], "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"ParametricPlot3D", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Evaluate", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "[", 
+             RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+            RowBox[{"Cos", "[", 
+             RowBox[{"u", "[", "t", "]"}], "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"f", "[", 
+             RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"u", "[", "t", "]"}], "]"}]}], ",", " ", 
+           RowBox[{"g", "[", 
+            RowBox[{"v", "[", "t", "]"}], "]"}]}], "}"}], "/.", "curve"}], 
+        "]"}], "}"}], " ", ",", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", " ", "0", ",", " ", "length"}], "}"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Thickness", "[", "thickness", "]"}], ",", "color"}], 
+        "}"}]}]}], "]"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "These", " ", "color", " ", "and", " ", "thicken", " ", "automatically", 
+     " ", "based", " ", "on", " ", "type", " ", "of", " ", "curve"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getBoundaryPlot", "[", 
+     RowBox[{"curve_", ",", " ", "length_"}], "]"}], ":=", 
+    RowBox[{"getPlot", "[", 
+     RowBox[{"curve", ",", " ", "length", ",", "0.005", ",", " ", "Black"}], 
+     "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getTrajectoryPlot", "[", 
+     RowBox[{"curve_", ",", " ", "length_"}], "]"}], ":=", 
+    RowBox[{"getPlot", "[", 
+     RowBox[{"curve", ",", "length", ",", "0.002", ",", "Blue"}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Calculates", " ", "information", " ", "about", " ", "the", " ", "next", 
+     " ", "reflection", " ", "of", " ", "the", " ", "curve", " ", "with", " ",
+      "the", " ", "table", " ", "defined", " ", "by", " ", "the", " ", 
+     "boundary", " ", "components", " ", "listed"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nextIntersectDetailed", "[", 
+     RowBox[{"curve_", ",", "boundaryList_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "bestBoundary", ",", "thisT", ",", "thisTBoundary", ",", "bestIndex", 
+        ",", "bestT", ",", "int", ",", "j", ",", "k", ",", "l", ",", 
+        "bestInt"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"bestBoundary", "=", 
+        RowBox[{
+         RowBox[{"boundaryList", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"thisT", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"bestIndex", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"bestT", "=", "9999"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", 
+          RowBox[{"Length", "[", "boundaryList", "]"}]}], ",", 
+         RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"k", "=", 
+             RowBox[{"Floor", "[", 
+              RowBox[{
+               RowBox[{"boundaryList", "[", 
+                RowBox[{"[", "j", "]"}], "]"}], "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ",", 
+            RowBox[{"k", "<", 
+             RowBox[{"Ceiling", "[", 
+              RowBox[{
+               RowBox[{"boundaryList", "[", 
+                RowBox[{"[", "j", "]"}], "]"}], "[", 
+               RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ",", 
+            RowBox[{"k", "=", 
+             RowBox[{"k", "+", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"boundaryList", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "[", 
+                  RowBox[{"[", "3", "]"}], "]"}], "-", 
+                 RowBox[{
+                  RowBox[{"boundaryList", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "6"}]}]}], 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"For", "[", 
+              RowBox[{
+               RowBox[{"l", "=", "0"}], ",", 
+               RowBox[{"l", "<", "4"}], ",", 
+               RowBox[{"l", "=", 
+                RowBox[{"l", "+", ".25"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"Check", "[", 
+                 RowBox[{
+                  RowBox[{"int", "=", 
+                   RowBox[{"getIntersect", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "l", ",", "k"}], 
+                    "]"}]}], ",", 
+                  RowBox[{"Goto", "[", "skipped", "]"}]}], "]"}], ";", " ", 
+                RowBox[{"(*", 
+                 RowBox[{
+                  RowBox[{
+                  "If", " ", "trying", " ", "this", " ", "intersect", " ", 
+                   "fails"}], ",", " ", 
+                  RowBox[{
+                  "skip", " ", "checking", " ", "whether", " ", "it", " ", 
+                   "is", " ", "the", " ", "best", " ", "intersect"}]}], 
+                 "*)"}], "\[IndentingNewLine]", 
+                RowBox[{"thisT", "=", 
+                 RowBox[{"t", "/.", 
+                  RowBox[{"int", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"thisTBoundary", "=", 
+                 RowBox[{"t2", "/.", 
+                  RowBox[{"int", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}]}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"If", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"thisT", ">", "0.00001"}], " ", "&&", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"thisTBoundary", ">", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "&&", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"thisTBoundary", "<", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}]}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"thisT", "<", "bestT"}], " ", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"bestT", "=", "thisT"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestIndex", "=", "j"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestBoundary", "=", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestInt", "=", "int"}], ";"}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"Label", "[", "skipped", "]"}], ";"}]}], 
+              "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+           "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", 
+        RowBox[{"<|", 
+         RowBox[{
+          RowBox[{"trajectory", " ", "\[Rule]", " ", "curve"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"trajectoryLength", " ", "\[Rule]", " ", "t"}], "/.", 
+           RowBox[{"bestInt", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"boundaryComponent", "\[Rule]", "bestBoundary"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"boundaryLocation", "\[Rule]", "t2"}], "/.", 
+           RowBox[{"bestInt", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"boundaryIndex", "\[Rule]", "bestIndex"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"intersectionAngle", "\[Rule]", " ", 
+           RowBox[{"FractionalPart", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"getAngleFromCurve", "[", 
+                 RowBox[{"bestBoundary", ",", 
+                  RowBox[{"t2", "/.", 
+                   RowBox[{"bestInt", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}], "-", 
+                RowBox[{"getAngleFromCurve", "[", 
+                 RowBox[{"curve", ",", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{"bestInt", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ")"}], "/", 
+              RowBox[{"(", "Pi", ")"}]}], "+", "5"}], "]"}]}], ",", " ", 
+          RowBox[{"(*", 
+           RowBox[{
+           "This", " ", "is", " ", "a", " ", "number", " ", "between", " ", 
+            "0", " ", "and", " ", "1"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"intersection", "\[Rule]", "bestInt"}]}], "|>"}], "]"}]}]}],
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Gets", " ", "a", " ", "number", " ", "of", " ", "consecutive", " ", 
+     "trajectories", " ", "from", " ", "a", " ", "starting", " ", 
+     "trajectory", " ", "on", " ", "a", " ", "given", " ", 
+     RowBox[{"table", "."}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"guessTrajectoryListFinal", "[", 
+     RowBox[{"initial_", ",", "count_", ",", "boundaryList_"}], "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "curve", ",", "int", ",", "plist", ",", "bestBoundary", ",", 
+        "intDetails", ",", "monitor"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"plist", "=", 
+        RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"curve", "=", "initial"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"monitor", "=", 
+           RowBox[{"PrintTemporary", "[", "i", "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"intDetails", "=", 
+           RowBox[{"nextIntersectDetailed", "[", 
+            RowBox[{"curve", ",", "boundaryList"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"intDetails", "[", "trajectoryLength", "]"}], ")"}], 
+             "<", ".00001"}], ",", 
+            RowBox[{"Module", "[", 
+             RowBox[{
+              RowBox[{"{", "}"}], ",", 
+              RowBox[{
+               RowBox[{
+               "Print", "[", 
+                "\"\<Possible error encountered: trajectory is very \
+short\>\"", "]"}], ";", "Interrupt"}]}], "]"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"plist", ",", "intDetails"}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"curve", "=", 
+           RowBox[{"getNextTrajectory", "[", 
+            RowBox[{
+             RowBox[{"intDetails", "[", "trajectory", "]"}], ",", 
+             RowBox[{"intDetails", "[", "boundaryComponent", "]"}], ",", 
+             RowBox[{"intDetails", "[", "intersection", "]"}]}], "]"}]}], ";",
+           "\[IndentingNewLine]", 
+          RowBox[{"NotebookDelete", "[", "monitor", "]"}], ";"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "count"}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "plist", "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getGeodesicCurvature", "[", "curve_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "spaceCurve", ",", "curvature", ",", "unitNormal", ",", "ucurve", ",", 
+        "vcurve"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ucurve", "=", 
+        RowBox[{"u", "/.", "curve"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"vcurve", "=", 
+        RowBox[{"v", "/.", "curve"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"spaceCurve", "[", "t_", "]"}], ":=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"f", "[", 
+            RowBox[{"vcurve", "[", "t", "]"}], "]"}], "*", 
+           RowBox[{"Cos", "[", 
+            RowBox[{"ucurve", "[", "t", "]"}], "]"}]}], ",", 
+          RowBox[{
+           RowBox[{"f", "[", 
+            RowBox[{"vcurve", "[", "t", "]"}], "]"}], "*", 
+           RowBox[{"Sin", "[", 
+            RowBox[{"ucurve", "[", "t", "]"}], "]"}]}], ",", 
+          RowBox[{"g", "[", 
+           RowBox[{"vcurve", "[", "t", "]"}], "]"}]}], "}"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"curvature", "=", 
+        RowBox[{"Function", "[", 
+         RowBox[{"t", ",", 
+          RowBox[{"Norm", "[", 
+           RowBox[{"Cross", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"spaceCurve", "'"}], "[", "t", "]"}], ",", 
+             RowBox[{
+              RowBox[{"spaceCurve", "''"}], "[", "t", "]"}]}], "]"}], "]"}]}],
+          "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"unitNormal", "=", 
+        RowBox[{"Function", "[", 
+         RowBox[{"t", ",", 
+          RowBox[{"Cross", "[", 
+           RowBox[{
+            RowBox[{"Normalize", "[", 
+             RowBox[{
+              RowBox[{"spaceCurve", "'"}], "[", "t", "]"}], "]"}], ",", 
+            RowBox[{"Normalize", "[", 
+             RowBox[{"Cross", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"spaceCurve", "'"}], "[", "t", "]"}], ",", 
+               RowBox[{
+                RowBox[{"spaceCurve", "''"}], "[", "t", "]"}]}], "]"}], 
+             "]"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"curvature", "[", "1", "]"}], "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", 
+        RowBox[{"Function", "[", 
+         RowBox[{"t", ",", 
+          RowBox[{
+           RowBox[{"Cross", "[", 
+            RowBox[{
+             RowBox[{"surfaceUnitNormal", "[", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"ucurve", "[", "t", "]"}], ")"}], ",", 
+               RowBox[{"(", 
+                RowBox[{"vcurve", "[", "t", "]"}], ")"}]}], "]"}], ",", 
+             RowBox[{"Normalize", "[", 
+              RowBox[{
+               RowBox[{"spaceCurve", "'"}], "[", "t", "]"}], "]"}]}], "]"}], 
+           ".", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"curvature", "[", "t", "]"}], 
+             RowBox[{"unitNormal", "[", "t", "]"}]}], ")"}]}]}], "]"}], 
+        "]"}]}]}], "]"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Gaussian", " ", "curvature", " ", "of", " ", "surface"}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"K", "[", "v_", "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"g", "'"}], "[", "v", "]"}], "^", "2"}]}], "  ", 
+        RowBox[{
+         RowBox[{"f", "''"}], "[", "v", "]"}]}], " ", "+", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"g", "'"}], "[", "v", "]"}], 
+        RowBox[{
+         RowBox[{"f", "'"}], "[", "v", "]"}], 
+        RowBox[{
+         RowBox[{"g", "''"}], "[", "v", "]"}]}]}], ")"}], "/", 
+     RowBox[{"(", " ", 
+      RowBox[{
+       RowBox[{"f", "[", "v", "]"}], "*", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "v", "]"}], "^", "2"}], "+", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"g", "'"}], "[", "v", "]"}], "^", "2"}]}], ")"}], "^", 
+        "2"}]}], ")"}]}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "The", " ", "matrix", " ", "T", " ", "as", " ", "a", " ", "function", " ",
+      "of", " ", "length", " ", "t"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getT", "[", "curve_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"v1", ",", "A", ",", "B", ",", "T"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"v1", "[", "t_", "]"}], ":=", 
+        RowBox[{
+         RowBox[{"v", "[", "t", "]"}], "/.", "curve"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"A", ":=", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"J", "''"}], "[", "t", "]"}], "+", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"K", "[", 
+                  RowBox[{"v", "[", "t", "]"}], "]"}], "/.", "curve"}], ")"}],
+                "*", 
+               RowBox[{"J", "[", "t", "]"}]}]}], "\[Equal]", "0"}], ",", 
+            RowBox[{
+             RowBox[{"J", "[", "0", "]"}], "==", "1"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"J", "'"}], "[", "0", "]"}], "==", "0"}]}], "}"}], ",", 
+          RowBox[{"{", "J", "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", 
+            RowBox[{"-", "1"}], ",", "10"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"B", ":=", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"J", "''"}], "[", "t", "]"}], "+", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"K", "[", 
+                  RowBox[{"v", "[", "t", "]"}], "]"}], "/.", "curve"}], ")"}],
+                "*", 
+               RowBox[{"J", "[", "t", "]"}]}]}], "\[Equal]", "0"}], ",", 
+            RowBox[{
+             RowBox[{"J", "[", "0", "]"}], "\[Equal]", "0"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"J", "'"}], "[", "0", "]"}], "\[Equal]", "1"}]}], "}"}],
+           ",", 
+          RowBox[{"{", "J", "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", 
+            RowBox[{"-", "1"}], ",", "10"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"T", "[", "t_", "]"}], ":=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"J", "[", "t", "]"}], "/.", 
+              RowBox[{"A", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ")"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"J", "[", "t", "]"}], "/.", 
+              RowBox[{"B", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"J", "'"}], "[", "t", "]"}], "/.", 
+              RowBox[{"A", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ")"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"J", "'"}], "[", "t", "]"}], "/.", 
+              RowBox[{"B", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}], "}"}]}], "}"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "T", "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Gets", " ", "list", " ", "of", " ", "matrices", " ", "to", " ", "be", 
+      " ", "multiplied", " ", "together"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"in", " ", "order"}], " ", "..."}], "R_", "2"}], ",", 
+     RowBox[{"T_", "2"}], ",", 
+     RowBox[{"R_", "1"}], ",", 
+     RowBox[{"T_", "1"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"getSequenceOfMatrices", "[", "trajectoryList_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "mList", ",", "curve", ",", "tcurve", ",", " ", "boundary", ",", 
+        "tboundary"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"mList", "=", 
+        RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"curve", "=", 
+           RowBox[{
+            RowBox[{"trajectoryList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"tcurve", "=", 
+           RowBox[{
+            RowBox[{"trajectoryList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"boundary", "=", 
+           RowBox[{
+            RowBox[{"trajectoryList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"tboundary", "=", 
+           RowBox[{
+            RowBox[{"trajectoryList", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "4", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"PrependTo", "[", 
+           RowBox[{"mList", ",", 
+            RowBox[{
+             RowBox[{"getT", "[", "curve", "]"}], "[", "tcurve", "]"}]}], 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"PrependTo", "[", 
+           RowBox[{"mList", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"2", "*", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"getGeodesicCurvature", "[", "boundary", "]"}], 
+                   "[", "tboundary", "]"}], "/", 
+                  RowBox[{"(", 
+                   RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"boundary", ",", "tboundary"}], "]"}], "-", 
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"curve", ",", "tcurve"}], "]"}]}], "]"}], 
+                   ")"}]}]}], ",", 
+                RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "trajectoryList", "]"}]}], "}"}]}], "]"}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "mList", "]"}], ";"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"TraceOfMatrices", "[", "lst_", "]"}], ":=", 
+    RowBox[{"Tr", "[", 
+     RowBox[{"Dot", "@@", "lst"}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Returns", " ", "3", "D", " ", "plot", " ", "of", " ", "surface"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SurfacePlot", "[", 
+     RowBox[{"f_", ",", "g_", ",", "vmin_", ",", "vmax_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"f1", ",", "f2", ",", "f3", ",", "F", ",", "Surface"}], "}"}], 
+      ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f1", "[", 
+         RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+        RowBox[{
+         RowBox[{"f", "[", "v", "]"}], 
+         RowBox[{"Cos", "[", "u", "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"f2", "[", 
+         RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+        RowBox[{
+         RowBox[{"f", "[", "v", "]"}], 
+         RowBox[{"Sin", "[", "u", "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"f3", "[", 
+         RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+        RowBox[{"g", "[", "v", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"F", "[", 
+         RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"f1", "[", 
+           RowBox[{"u", ",", "v"}], "]"}], ",", 
+          RowBox[{"f2", "[", 
+           RowBox[{"u", ",", "v"}], "]"}], ",", 
+          RowBox[{"f3", "[", 
+           RowBox[{"u", ",", "v"}], "]"}]}], "}"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Surface", ":=", 
+        RowBox[{"ParametricPlot3D", "[", 
+         RowBox[{
+          RowBox[{"F", "[", 
+           RowBox[{"s", ",", "t"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"s", ",", "0", ",", 
+            RowBox[{"2", "Pi"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "vmin", ",", "vmax"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "Surface", "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"EvalCoords", "[", "pt_", "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"f", "[", 
+        RowBox[{"pt", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "]"}], 
+       RowBox[{"Cos", "[", 
+        RowBox[{"pt", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"f", "[", 
+        RowBox[{"pt", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "]"}], 
+       RowBox[{"Sin", "[", 
+        RowBox[{"pt", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ",", 
+      RowBox[{"g", "[", 
+       RowBox[{"pt", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Gives", " ", "trajectory", " ", 
+     RowBox[{"(", "geodesic", ")"}], " ", "starting", " ", "on", " ", "point",
+      " ", "on", " ", "boundary"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"TrajectoryFromBoundary", "[", 
+     RowBox[{"boundary_", ",", "t_", ",", "angle_"}], "]"}], ":=", 
+    RowBox[{"geodesicSolve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"u", "[", "t", "]"}], "/.", "boundary"}], ",", 
+      RowBox[{
+       RowBox[{"v", "[", "t", "]"}], "/.", "boundary"}], ",", 
+      RowBox[{"angle", "+", 
+       RowBox[{"getAngleFromCurve", "[", 
+        RowBox[{"boundary", ",", "t"}], "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Gives", " ", "Clairaut", " ", "constant", " ", "of", " ", 
+     RowBox[{"curve", ".", " ", "Assumes"}], " ", "Clairaut", " ", "function",
+      " ", "is", " ", "indeed", " ", "constant"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ClairautConstant", "[", "curve_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Cos", "[", 
+      RowBox[{"getAngleFromCurve", "[", 
+       RowBox[{"curve", ",", "0"}], "]"}], "]"}], 
+     RowBox[{"f", "[", 
+      RowBox[{
+       RowBox[{"v", "[", "0", "]"}], "/.", "curve"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Gives", " ", "Clairaut", " ", "constant", " ", "of", " ", 
+     RowBox[{"curve", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ClairautConstant", "[", 
+     RowBox[{"curve_", ",", "t_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Cos", "[", 
+      RowBox[{"getAngleFromCurve", "[", 
+       RowBox[{"curve", ",", "t"}], "]"}], "]"}], 
+     RowBox[{"f", "[", 
+      RowBox[{
+       RowBox[{"v", "[", "t", "]"}], "/.", "curve"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"From", " ", "trajectories"}], ",", " ", 
+     RowBox[{
+     "gives", " ", "lists", " ", "of", " ", "points", " ", "on", " ", "the", 
+      " ", "phase", " ", "spaces", " ", "of", " ", "each", " ", "boundary", 
+      " ", "component"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"BilliardMapPhaseSpace", "[", 
+      RowBox[{"trajectories_", ",", "boundaryList_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "assoc", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"assoc", "=", 
+         RowBox[{"AssociationMap", "[", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{"e", ",", 
+             RowBox[{"List", "[", "]"}]}], "]"}], ",", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{"Function", "[", 
+              RowBox[{"e", ",", 
+               RowBox[{"e", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
+             "boundaryList"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"AppendTo", "[", 
+           RowBox[{
+            RowBox[{"assoc", "[", 
+             RowBox[{"#", "[", "boundaryComponent", "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"#", "[", "boundaryLocation", "]"}], ",", 
+              RowBox[{"#", "[", "intersectionAngle", "]"}]}], "}"}]}], "]"}], 
+          "&"}], "/@", "trajectories"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "assoc", "]"}], ";"}]}], "\[IndentingNewLine]",
+       "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Displays", " ", "these", " ", "phase", " ", "spaces"}], ",", 
+     " ", 
+     RowBox[{"one", " ", "for", " ", "each", " ", "boundary", " ", 
+      RowBox[{"component", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ShowPhaseSpace", "[", 
+      RowBox[{"assoc_", ",", "boundaryList_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Print", "[", 
+        RowBox[{"ListPlot", "[", 
+         RowBox[{
+          RowBox[{"RemoveEmptyLists", "[", 
+           RowBox[{"assoc", "[", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "3", "]"}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}]}], "]"}], "]"}], 
+       "&"}], "/@", "boundaryList"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakeAndShowPhaseSpace", "[", 
+      RowBox[{"trajectories_", ",", "boundaryList_"}], "]"}], ":=", 
+     RowBox[{"ShowPhaseSpace", "[", 
+      RowBox[{
+       RowBox[{"BilliardMapPhaseSpace", "[", 
+        RowBox[{"trajectories", ",", "boundaryList"}], "]"}], ",", 
+       "boundaryList"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Gets", " ", "3", "D", " ", "plots", " ", "of", " ", "trajectories"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TrajectoryPictures", "[", "trajectories_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"getTrajectoryPlot", "[", 
+        RowBox[{
+         RowBox[{"#", "[", "trajectory", "]"}], ",", 
+         RowBox[{"#", "[", "trajectoryLength", "]"}]}], "]"}], "&"}], "/@", 
+      "trajectories"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "3", "D", " ", "plots", " ", "of", " ", "boundary", " ", "components"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BoundaryPictures", "[", "boundaryList_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"getBoundaryPlot", "[", 
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+     "boundaryList"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "gets", " ", "list", " ", "of", " ", "points", " ", "aggregated", " ", 
+     "from", " ", "multiple", " ", "orbits"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PlotMultiplePhaseSpace", "[", 
+      RowBox[{"orbits_", ",", "boundaryList_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"plotList", ",", "assoc"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"plotList", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"BilliardMapPhaseSpace", "[", 
+            RowBox[{"#", ",", "boundaryList"}], "]"}], "&"}], "/@", 
+          "orbits"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"assoc", "=", 
+         RowBox[{"AssociationMap", "[", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{"e", ",", 
+             RowBox[{"List", "[", "]"}]}], "]"}], ",", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{"Function", "[", 
+              RowBox[{"e", ",", 
+               RowBox[{"e", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
+             "boundaryList"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Function", "[", 
+          RowBox[{"f", ",", 
+           RowBox[{
+            RowBox[{"Function", "[", 
+             RowBox[{"e", ",", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{
+                RowBox[{"assoc", "[", 
+                 RowBox[{"e", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+                RowBox[{"f", "[", 
+                 RowBox[{"e", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], "/@",
+             "boundaryList"}]}], "]"}], "/@", "plotList"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "assoc", "]"}], ";"}]}], "\[IndentingNewLine]",
+       "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Displays", " ", "phase", " ", "space", " ", "from", " ", "multiple", " ", 
+     RowBox[{"orbits", ".", " ", "Each"}], " ", "orbit", " ", "gets", " ", 
+     "its", " ", "own", " ", "color", " ", "of", " ", "points"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakeAndPrintPhaseSpaceMultiple", "[", 
+      RowBox[{"orbits_", ",", "boundaryList_"}], "]"}], ":=", 
+     RowBox[{"ShowPhaseSpace", "[", 
+      RowBox[{
+       RowBox[{"PlotMultiplePhaseSpace", "[", 
+        RowBox[{"orbits", ",", "boundaryList"}], "]"}], ",", "boundaryList"}],
+       "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Since", " ", "some", " ", "orbits", " ", "may", " ", "fail", " ", "to", 
+      " ", "ever", " ", "intersect", " ", "a", " ", "certain", " ", 
+      "boundary", " ", "component"}], ",", " ", 
+     RowBox[{
+     "this", " ", "sanitizes", " ", "lists", " ", "to", " ", "remove", " ", 
+      "empty", " ", "sublists", " ", "so", " ", "ListPlot", " ", "will", " ", 
+      "accept", " ", 
+      RowBox[{"them", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"RemoveEmptyLists", "[", "list_", "]"}], ":=", 
+     RowBox[{"Replace", "[", 
+      RowBox[{"list", ",", 
+       RowBox[{"x_List", "\[RuleDelayed]", 
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{"x", ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "Infinity"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CompressOrbit", "[", "orbit_", "]"}], ":=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"orbit", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "[", "trajectory", "]"}], ",", 
+       RowBox[{"KeyDrop", "[", 
+        RowBox[{"orbit", ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "trajectory", ",", "boundaryComponent", ",", "intersectionAngle", 
+           ",", "intersection"}], "}"}]}], "]"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DecompressOrbit", "[", 
+     RowBox[{"compressed_", ",", "boundaries_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"currentTraj", ",", "compressedOrbit", ",", "expanded"}], 
+       "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"expanded", "=", 
+        RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"currentTraj", "=", 
+        RowBox[{"compressed", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"compressedOrbit", "=", 
+        RowBox[{"compressed", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"expanded", ",", "\[IndentingNewLine]", 
+            RowBox[{"<|", 
+             RowBox[{
+              RowBox[{"trajectory", "\[Rule]", "currentTraj"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"trajectoryLength", "\[Rule]", 
+               RowBox[{
+                RowBox[{"compressedOrbit", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "[", "trajectoryLength", 
+                "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"boundaryComponent", "\[Rule]", 
+               RowBox[{
+                RowBox[{"boundaries", "[", 
+                 RowBox[{"[", 
+                  RowBox[{
+                   RowBox[{"compressedOrbit", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryIndex", 
+                   "]"}], "]"}], "]"}], "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"boundaryLocation", "\[Rule]", 
+               RowBox[{
+                RowBox[{"compressedOrbit", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryLocation", 
+                "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"boundaryIndex", "\[Rule]", 
+               RowBox[{
+                RowBox[{"compressedOrbit", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryIndex", 
+                "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"intersectionAngle", "\[Rule]", " ", 
+               RowBox[{"FractionalPart", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"boundaries", "[", 
+                    RowBox[{"[", 
+                    RowBox[{
+                    RowBox[{"compressedOrbit", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryIndex", 
+                    "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"compressedOrbit", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryLocation", 
+                    "]"}]}], "]"}], "-", 
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"currentTraj", ",", 
+                    RowBox[{
+                    RowBox[{"compressedOrbit", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", "trajectoryLength", 
+                    "]"}]}], "]"}]}], ")"}], "/", 
+                  RowBox[{"(", "Pi", ")"}]}], "+", "5"}], "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"intersection", "\[Rule]", " ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"t", "\[Rule]", " ", 
+                  RowBox[{
+                   RowBox[{"compressedOrbit", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", "trajectoryLength", 
+                   "]"}]}], ",", 
+                 RowBox[{"t2", "\[Rule]", " ", 
+                  RowBox[{
+                   RowBox[{"compressedOrbit", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryLocation", 
+                   "]"}]}]}], "}"}]}]}], "|>"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"currentTraj", "=", 
+           RowBox[{"getNextTrajectory", "[", 
+            RowBox[{"currentTraj", ",", 
+             RowBox[{
+              RowBox[{"boundaries", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"compressedOrbit", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryIndex", "]"}],
+                 "]"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"t", "\[Rule]", " ", 
+                RowBox[{
+                 RowBox[{"compressedOrbit", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "[", "trajectoryLength", 
+                 "]"}]}], ",", 
+               RowBox[{"t2", "\[Rule]", " ", 
+                RowBox[{
+                 RowBox[{"compressedOrbit", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "[", "boundaryLocation", 
+                 "]"}]}]}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "compressedOrbit", "]"}]}], "}"}]}], "]"}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", "\"\<done\>\"", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "expanded", "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", "Deprecated", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"getGeodesicCurvature", "[", "curve_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Function", "[", 
+        RowBox[{"t", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", 
+             FractionBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{"f", "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], " ", 
+               RowBox[{
+                SuperscriptBox["f", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["u", "\[Prime]",
+                  MultilineFunction->None], "[", "t", "]"}], "3"]}], 
+              SqrtBox[
+               RowBox[{
+                SuperscriptBox[
+                 RowBox[{
+                  SuperscriptBox["f", "\[Prime]",
+                   MultilineFunction->None], "[", 
+                  RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+                SuperscriptBox[
+                 RowBox[{
+                  SuperscriptBox["g", "\[Prime]",
+                   MultilineFunction->None], "[", 
+                  RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]]}], "-", 
+            FractionBox[
+             RowBox[{"2", " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["f", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "3"], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["v", "\[Prime]",
+                 MultilineFunction->None], "[", "t", "]"}], "2"]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "-", 
+            FractionBox[
+             RowBox[{"2", " ", 
+              RowBox[{
+               SuperscriptBox["f", "\[Prime]",
+                MultilineFunction->None], "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["g", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["v", "\[Prime]",
+                 MultilineFunction->None], "[", "t", "]"}], "2"]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "+", 
+            FractionBox[
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["f", "\[Prime]",
+                MultilineFunction->None], "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["v", "\[Prime]",
+                 MultilineFunction->None], "[", "t", "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["f", "\[Prime]\[Prime]",
+                MultilineFunction->None], "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "+", 
+            FractionBox[
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["g", "\[Prime]",
+                MultilineFunction->None], "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["v", "\[Prime]",
+                 MultilineFunction->None], "[", "t", "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["g", "\[Prime]\[Prime]",
+                MultilineFunction->None], "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "-", 
+            FractionBox[
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["f", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["v", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "-", 
+            FractionBox[
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["g", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["v", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "+", 
+            FractionBox[
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["f", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["v", "\[Prime]\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]], "+", 
+            FractionBox[
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{"v", "[", "t", "]"}], "]"}], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["g", "\[Prime]",
+                 MultilineFunction->None], "[", 
+                RowBox[{"v", "[", "t", "]"}], "]"}], "2"], " ", 
+              RowBox[{
+               SuperscriptBox["u", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], " ", 
+              RowBox[{
+               SuperscriptBox["v", "\[Prime]\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}]}], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["f", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                 SuperscriptBox["g", "\[Prime]",
+                  MultilineFunction->None], "[", 
+                 RowBox[{"v", "[", "t", "]"}], "]"}], "2"]}]]]}], ")"}], "/.",
+           "curve"}]}], "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"surfaceUnitNormal", "[", 
+        RowBox[{"u_", ",", "v_"}], "]"}]}], ":=", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"g", "'"}], "[", "v", "]"}], 
+          RowBox[{"Cos", "[", "u", "]"}]}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"g", "'"}], "[", "v", "]"}], 
+          RowBox[{"Sin", "[", "u", "]"}]}], ",", 
+         RowBox[{
+          RowBox[{"f", "'"}], "[", "v", "]"}]}], "}"}], "/", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "v", "]"}], ")"}], "^", "2"}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"g", "'"}], "[", "v", "]"}], ")"}], "^", "2"}]}], 
+        "]"}]}]}]}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"This", " ", 
+      RowBox[{"doesn", "'"}], "t", " ", "work", " ", "and", " ", 
+      RowBox[{"it", "'"}], "s", " ", "only", " ", "marginally", " ", "faster",
+       " ", "than", " ", "the", " ", "other", " ", "one"}], ",", " ", 
+     RowBox[{
+      RowBox[{"but", " ", 
+       RowBox[{"it", "'"}], "s", " ", "a", " ", "nice", " ", "proof", " ", 
+       "of", " ", 
+       RowBox[{"concept", ".", "\[IndentingNewLine]", 
+        RowBox[{"guessTrajectoryList", "[", 
+         RowBox[{"initial_", ",", "count_", ",", "boundaryList_"}], "]"}]}]}],
+       ":=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "curve", ",", "int", ",", "plist", ",", "bestT", ",", "thisT", ",",
+             "bestBoundary", ",", "bestIndex", ",", "thisTBoundary", ",", 
+            "bestL", ",", "bestK", ",", "vari", ",", "bestTforthisJ", ",", 
+            "maxL", ",", "thisKImprovedResult"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            RowBox[{"Dynamic", "[", "i", "]"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"plist", "=", 
+            RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestBoundary", "=", 
+            RowBox[{
+             RowBox[{"boundaryList", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestIndex", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"thisT", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"curve", "=", "initial"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Do", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"bestT", "=", "9999"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"For", "[", 
+               RowBox[{
+                RowBox[{"j", "=", "1"}], ",", 
+                RowBox[{"j", "\[LessEqual]", 
+                 RowBox[{"Length", "[", "boundaryList", "]"}]}], ",", 
+                RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"bestTforthisJ", "=", "bestT"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"maxL", "=", "4"}], ";", "\[IndentingNewLine]", 
+                 RowBox[{"bestL", "=", "0"}], ";", "\[IndentingNewLine]", 
+                 RowBox[{"For", "[", 
+                  RowBox[{
+                   RowBox[{"k", "=", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ",", 
+                   RowBox[{"k", "<", 
+                    RowBox[{"Ceiling", "[", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ",", 
+                   RowBox[{"k", "=", 
+                    RowBox[{"k", "+", ".25"}]}], ",", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"bestK", "=", "0"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"thisKImprovedResult", "=", "False"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"For", "[", 
+                    RowBox[{
+                    RowBox[{"l", "=", "0"}], ",", 
+                    RowBox[{"l", "<", "maxL"}], ",", 
+                    RowBox[{"l", "=", 
+                    RowBox[{"l", "+", ".25"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"int", "=", 
+                    RowBox[{"getIntersect", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "l", ",", "k"}], 
+                    "]"}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"Pause", "[", ".1", "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"int", ",", "j", ",", "k", ",", "l"}], "]"}], ";",
+                     "\[IndentingNewLine]", 
+                    RowBox[{"thisT", "=", 
+                    RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", "=", 
+                    RowBox[{"t2", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"thisT", ">", "0.001"}], " ", "&&", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", ">", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "&&", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", "<", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"thisT", "<", "bestTforthisJ"}], " ", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"bestTforthisJ", "=", "thisT"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestIndex", "=", "j"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestL", "=", "l"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"bestK", "=", "k"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"thisKImprovedResult", "=", "True"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestBoundary", "=", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"maxL", "=", "l"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"Break", "[", "]"}]}]}], "\[IndentingNewLine]", 
+                    "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"thisKImprovedResult", "\[Equal]", "False"}], ",", 
+                    RowBox[{"Break", "[", "]"}]}], "]"}]}]}], 
+                  "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"bestTforthisJ", "<", "bestT"}], " ", ",", 
+                   RowBox[{"bestT", "=", "bestTforthisJ"}]}], "]"}]}]}], 
+               "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Label", "[", "found", "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"int", "=", 
+               RowBox[{"getIntersect", "[", 
+                RowBox[{
+                "curve", ",", "bestBoundary", ",", "bestL", ",", "bestK"}], 
+                "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"Pause", "[", ".1", "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "<", ".001"}], 
+                ",", 
+                RowBox[{
+                "Print", "[", "\"\<May have encountered an error\>\"", 
+                 "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"plist", ",", 
+                RowBox[{"List", "[", 
+                 RowBox[{"curve", ",", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ",", "bestBoundary", 
+                  ",", 
+                  RowBox[{"t2", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ",", "bestIndex"}], 
+                 "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"curve", "=", 
+               RowBox[{"getNextTrajectory", "[", 
+                RowBox[{"curve", ",", "bestBoundary", ",", "int"}], "]"}]}]}],
+              "\[IndentingNewLine]", ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", "count"}], "}"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Return", "[", "plist", "]"}]}]}], "]"}], 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"getIntersectAlternate", "[", 
+         RowBox[{
+         "c1_", ",", "c2_", ",", "guess1_", ",", " ", "guess2_", ",", "tmin_",
+           ",", "tmax_", ",", "t2min_", ",", "t2max_"}], "]"}]}], ":=", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"FindRoot", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"u", "[", "t", "]"}], "/.", "c1"}], ",", 
+                RowBox[{"2", "Pi"}]}], "]"}], "\[Equal]", 
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"u", "[", "t2", "]"}], "/.", "c2"}], ",", 
+                RowBox[{"2", "Pi"}]}], "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "[", "t", "]"}], "/.", "c1"}], ")"}], "\[Equal]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "[", "t", "]"}], "/.", "c2"}], ")"}]}]}], "}"}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"t", ",", "guess1", ",", "tmin", ",", "tmax"}], "}"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"t2", ",", "guess2", ",", "t2min", ",", "t2max"}], 
+              "}"}]}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{"nextIntersectDetailedAlternate", "[", 
+          RowBox[{"curve_", ",", "boundaryList_"}], "]"}]}], ":=", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "bestBoundary", ",", "thisT", ",", "thisTBoundary", ",", 
+            "bestIndex", ",", "bestT", ",", "bestL", ",", "bestK", ",", "int",
+             ",", "bestInt", ",", "found"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"found", "=", "False"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestBoundary", "=", 
+            RowBox[{
+             RowBox[{"boundaryList", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"thisT", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestIndex", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestT", "=", "9999"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"For", "[", 
+            RowBox[{
+             RowBox[{"j", "=", "1"}], ",", 
+             RowBox[{"j", "\[LessEqual]", 
+              RowBox[{"Length", "[", "boundaryList", "]"}]}], ",", 
+             RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"For", "[", 
+               RowBox[{
+                RowBox[{"k", "=", 
+                 RowBox[{
+                  RowBox[{"boundaryList", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+                RowBox[{"k", "<", 
+                 RowBox[{"Ceiling", "[", 
+                  RowBox[{
+                   RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                   RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ",", 
+                RowBox[{"k", "=", 
+                 RowBox[{"k", "+", ".5"}]}], ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"For", "[", 
+                  RowBox[{
+                   RowBox[{"l", "=", "0.5"}], ",", 
+                   RowBox[{"l", "<", "4"}], ",", 
+                   RowBox[{"l", "=", 
+                    RowBox[{"l", "+", ".5"}]}], ",", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"Print", "[", "\"\<hello\>\"", "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"getIntersectAlternate", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "l", ",", "k", ",", 
+                    "0.00001", ",", "bestT", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"int", "=", 
+                    RowBox[{"getIntersectAlternate", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "l", ",", "k", ",", 
+                    "0.00001", ",", "bestT", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], "]"}]}], ",", 
+                    RowBox[{"Goto", "[", "skipped", "]"}]}], "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"int", ",", "j", ",", "l", ",", "k"}], "}"}], 
+                    "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"thisT", "=", 
+                    RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", "=", 
+                    RowBox[{"t2", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"thisT", ">", "0.00001"}], " ", "&&", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", ">", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "&&", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", "<", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"thisT", "<", "bestT"}], " ", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"bestT", "=", "thisT"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestIndex", "=", "j"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestL", "=", "l"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"bestK", "=", "k"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"bestBoundary", "=", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestInt", "=", "int"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"found", "=", "True"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Print", "[", "\"\<hey\>\"", "]"}], ";"}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Label", "[", "skipped", "]"}], ";"}]}], 
+                  "\[IndentingNewLine]", "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+            "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"If", " ", "[", 
+            RowBox[{
+             RowBox[{"!", "found"}], ",", 
+             RowBox[{"Interrupt", "[", "]"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"int", "=", "bestInt"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Return", "[", 
+            RowBox[{"<|", 
+             RowBox[{
+              RowBox[{"trajectory", " ", "\[Rule]", " ", "curve"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"trajectoryLength", " ", "\[Rule]", " ", "t"}], "/.", 
+               RowBox[{"int", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"boundaryComponent", "\[Rule]", "bestBoundary"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"boundaryLocation", "\[Rule]", "t2"}], "/.", 
+               RowBox[{"int", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"boundaryIndex", "\[Rule]", "bestIndex"}], ",", 
+              RowBox[{"intersectionAngle", "\[Rule]", " ", 
+               RowBox[{"FractionalPart", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"bestBoundary", ",", 
+                    RowBox[{"t2", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}], "-", 
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ")"}], "/", 
+                  RowBox[{"(", "Pi", ")"}]}], "+", "5"}], "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"intersection", "\[Rule]", "int"}]}], "|>"}], "]"}]}]}],
+          "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}]}]}]}], " ", 
+    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Given", " ", "a", " ", "first", " ", "trajectory"}], ",", " ", 
+     RowBox[{
+     "and", " ", "the", " ", "list", " ", "of", " ", "expected", " ", 
+      "boundary", " ", "components", " ", "the", " ", "orbit", " ", "will", 
+      " ", "run", " ", "in", " ", "to", " ", 
+      RowBox[{"(", 
+       RowBox[{"in", " ", "order"}], ")"}]}], ",", " ", 
+     RowBox[{
+     "this", " ", "gives", " ", "a", " ", "list", " ", "successive", " ", 
+      "trajectories", " ", "in", " ", "that", " ", "orbit"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"The", " ", "list", " ", "contains", " ", "triples"}], ",", " ", 
+     RowBox[{"where", " ", "each", " ", 
+      RowBox[{"has", ":"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"The", " ", "curve"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "The", " ", "t", " ", "value", " ", "along", " ", "that", " ", "curve", 
+      " ", "where", " ", "the", " ", "curve", " ", "intersects", " ", "the", 
+      " ", "next", " ", 
+      RowBox[{"boundary", ".", " ", "Since"}], " ", "all", " ", "curves", " ",
+       "are", " ", "unit", " ", "speed"}], ",", " ", 
+     RowBox[{
+     "this", " ", "is", " ", "also", " ", "the", " ", "length", " ", "of", 
+      " ", "the", " ", "trajectory"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"The", " ", "aforementioned", " ", "boundary"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "The", " ", "t", " ", "value", " ", "along", " ", "the", " ", "boundary", 
+     " ", "where", " ", "the", " ", "boundary", " ", "intersects", " ", "the",
+      " ", "curve"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"makeTrajectoryList", "[", 
+      RowBox[{"initial_", ",", "lst_"}], "]"}], ":=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"curve", ",", "int", ",", "plist"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"plist", "=", 
+           RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"curve", "=", "initial"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Do", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"int", "=", 
+              RowBox[{"getIntersect", "[", 
+               RowBox[{"curve", ",", 
+                RowBox[{"lst", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"plist", ",", 
+               RowBox[{"List", "[", 
+                RowBox[{"curve", ",", 
+                 RowBox[{"t", "/.", 
+                  RowBox[{"int", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+                 RowBox[{"lst", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], ",", 
+                 RowBox[{"t2", "/.", 
+                  RowBox[{"int", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"plist", ",", 
+                 RowBox[{"getTrajectoryPlot", "[", 
+                  RowBox[{"curve", ",", 
+                   RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], "]"}], ";"}],
+               "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"curve", "=", 
+              RowBox[{"getNextTrajectory", "[", 
+               RowBox[{"curve", ",", 
+                RowBox[{"lst", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], ",", "int"}], "]"}]}]}], 
+            "\[IndentingNewLine]", ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", 
+              RowBox[{"Length", "[", "lst", "]"}]}], "}"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Return", "[", "plist", "]"}]}]}], "]"}], 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"guessTrajectoryList", "[", 
+        RowBox[{"initial_", ",", "count_", ",", "boundaryList_"}], "]"}]}], ":=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "curve", ",", "int", ",", "plist", ",", "bestT", ",", "thisT", ",",
+             "bestBoundary", ",", "bestIndex"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"plist", "=", 
+            RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestBoundary", "=", 
+            RowBox[{"boundaryList", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestIndex", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"thisT", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"curve", "=", "initial"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Do", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"bestT", "=", "9999"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"Do", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"thisT", "=", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{
+                    RowBox[{"getIntersect", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}]}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"thisT", "<", "bestT"}], " ", "&&", " ", 
+                    RowBox[{"thisT", ">", "0.001"}]}], ",", 
+                   RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{
+                    RowBox[{"bestT", "=", "thisT"}], ";", 
+                    RowBox[{"bestIndex", "=", "j"}], ";", 
+                    RowBox[{"bestBoundary", "=", 
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}]}]}]}], "]"}]}], "]"}]}], 
+                ",", "\[IndentingNewLine]", 
+                RowBox[{"{", 
+                 RowBox[{"j", ",", "1", ",", 
+                  RowBox[{"Length", "[", "boundaryList", "]"}]}], "}"}]}], 
+               "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"int", "=", 
+               RowBox[{"getIntersect", "[", 
+                RowBox[{"curve", ",", "bestBoundary"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"plist", ",", 
+                RowBox[{"List", "[", 
+                 RowBox[{"curve", ",", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ",", "bestBoundary", 
+                  ",", 
+                  RowBox[{"t2", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Print", "[", 
+               RowBox[{"t", "/.", 
+                RowBox[{"int", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"curve", "=", 
+               RowBox[{"getNextTrajectory", "[", 
+                RowBox[{"curve", ",", "bestBoundary", ",", "int"}], "]"}]}]}],
+              "\[IndentingNewLine]", ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", "count"}], "}"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Return", "[", "plist", "]"}]}]}], "]"}], 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"getIntersectNew", "[", 
+         RowBox[{
+         "c1_", ",", "c2_", ",", "tmin_", ",", "tmax_", ",", "t2min_", ",", 
+          "t2max_"}], "]"}]}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"FindRoot", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"u", "[", "t", "]"}], "/.", "c1"}], ")"}], "\[Equal]",
+               " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"u", "[", "t2", "]"}], "/.", "c2"}], ")"}]}], ",", 
+             " ", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "[", "t", "]"}], "/.", "c1"}], ")"}], "\[Equal]",
+               " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "[", "t2", "]"}], "/.", "c2"}], ")"}]}], ",", 
+             RowBox[{"tmin", "\[LessEqual]", "t", "\[LessEqual]", "tmax"}], 
+             ",", 
+             RowBox[{
+             "t2min", "\[LessEqual]", "t2", "\[LessEqual]", "t2max"}]}], 
+            "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"t", ",", "tmin"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"t2", ",", "t2min"}], "}"}]}], "}"}]}], "]"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"guessTrajectoryListNew", "[", 
+          RowBox[{"initial_", ",", "count_", ",", "boundaryList_"}], "]"}]}], 
+        ":=", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "curve", ",", "int", ",", "plist", ",", "bestT", ",", "thisT", ",",
+             "bestBoundary", ",", "bestIndex", ",", "thisTBoundary", ",", 
+            "bestL", ",", "bestK", ","}], "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            RowBox[{"Dynamic", "[", "i", "]"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"plist", "=", 
+            RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestBoundary", "=", 
+            RowBox[{
+             RowBox[{"boundaryList", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestIndex", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"thisT", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"curve", "=", "initial"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Do", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"bestT", "=", "9999"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"For", "[", 
+               RowBox[{
+                RowBox[{"j", "=", "1"}], ",", 
+                RowBox[{"j", "\[LessEqual]", 
+                 RowBox[{"Length", "[", "boundaryList", "]"}]}], ",", 
+                RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"For", "[", 
+                  RowBox[{
+                   RowBox[{"k", "=", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ",", 
+                   RowBox[{"k", "<", 
+                    RowBox[{"Ceiling", "[", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ",", 
+                   RowBox[{"k", "=", 
+                    RowBox[{"k", "+", ".5"}]}], ",", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"For", "[", 
+                    RowBox[{
+                    RowBox[{"l", "=", "0"}], ",", 
+                    RowBox[{"l", "<", "4"}], ",", 
+                    RowBox[{"l", "=", 
+                    RowBox[{"l", "+", ".5"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"int", "=", 
+                    RowBox[{"getIntersect", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "l", ",", "k"}], 
+                    "]"}]}], ",", 
+                    RowBox[{"Goto", "[", "skipped", "]"}]}], "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisT", "=", 
+                    RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", "=", 
+                    RowBox[{"t2", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"thisT", ">", "0.00001"}], " ", "&&", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", ">", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "&&", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"thisTBoundary", "<", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"thisT", "<", "bestT"}], " ", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"bestT", "=", "thisT"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestIndex", "=", "j"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"bestL", "=", "l"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"bestK", "=", "k"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"bestBoundary", "=", 
+                    RowBox[{
+                    RowBox[{"boundaryList", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Label", "[", "skipped", "]"}], ";"}]}], 
+                    "\[IndentingNewLine]", "]"}], ";"}]}], 
+                  "\[IndentingNewLine]", "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"int", "=", 
+               RowBox[{"getIntersect", "[", 
+                RowBox[{
+                "curve", ",", "bestBoundary", ",", "bestL", ",", "bestK"}], 
+                "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "<", ".00001"}], 
+                ",", 
+                RowBox[{"Module", "[", 
+                 RowBox[{
+                  RowBox[{"{", "}"}], ",", 
+                  RowBox[{
+                   RowBox[{
+                   "Print", "[", "\"\<May have encountered an error\>\"", 
+                    "]"}], ";", 
+                   RowBox[{"Break", "[", "]"}]}]}], "]"}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"plist", ",", 
+                RowBox[{"List", "[", 
+                 RowBox[{"curve", ",", 
+                  RowBox[{"t", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ",", "bestBoundary", 
+                  ",", 
+                  RowBox[{"t2", "/.", 
+                   RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ",", "bestIndex", ",", 
+                  RowBox[{"FractionalPart", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"bestBoundary", ",", 
+                    RowBox[{"t2", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}], "-", 
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ")"}], "/", 
+                    RowBox[{"(", "Pi", ")"}]}], "+", "5"}], "]"}]}], "]"}]}], 
+               "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"curve", "=", 
+               RowBox[{"getNextTrajectory", "[", 
+                RowBox[{"curve", ",", "bestBoundary", ",", "int"}], "]"}]}]}],
+              "\[IndentingNewLine]", ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", "count"}], "}"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Return", "[", "plist", "]"}]}]}], "]"}]}]}]}]}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"guessTrajectoryListSingular", "[", 
+      RowBox[{"initial_", ",", "count_", ",", "boundary_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "curve", ",", "int", ",", "plist", ",", "bestT", ",", "thisT", ",", 
+         "bestIndex"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"plist", "=", 
+         RowBox[{"List", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"thisT", "=", "0"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"curve", "=", "initial"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"bestT", "=", "9999"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"bestIndex", "=", "1"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Do", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"thisT", "=", 
+               RowBox[{"t", "/.", 
+                RowBox[{
+                 RowBox[{"getIntersect", "[", 
+                  RowBox[{"curve", ",", "boundary", ",", "1", ",", "j"}], 
+                  "]"}], "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"thisT", "<", "bestT"}], " ", "&&", " ", 
+                 RowBox[{"thisT", ">", "0.001"}]}], ",", 
+                RowBox[{"Module", "[", 
+                 RowBox[{
+                  RowBox[{"{", "}"}], ",", 
+                  RowBox[{
+                   RowBox[{"bestT", "=", "thisT"}], ";", 
+                   RowBox[{"bestIndex", "=", "j"}]}]}], "]"}]}], "]"}]}], ",",
+              "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{"j", ",", "1", ",", "6"}], "}"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"int", "=", 
+            RowBox[{"getIntersect", "[", 
+             RowBox[{"curve", ",", "boundary", ",", "1", ",", "bestIndex"}], 
+             "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"plist", ",", 
+             RowBox[{"List", "[", 
+              RowBox[{"curve", ",", 
+               RowBox[{"t", "/.", 
+                RowBox[{"int", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], ",", "boundary", ",", 
+               RowBox[{"t2", "/.", 
+                RowBox[{"int", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+               RowBox[{"FractionalPart", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"boundary", ",", 
+                    RowBox[{"t2", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}], "-", 
+                    RowBox[{"getAngleFromCurve", "[", 
+                    RowBox[{"curve", ",", 
+                    RowBox[{"t", "/.", 
+                    RowBox[{"int", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ")"}], "/", 
+                  RowBox[{"(", "Pi", ")"}]}], "+", "5"}], "]"}]}], "]"}]}], 
+            "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"curve", "=", 
+            RowBox[{"getNextTrajectory", "[", 
+             RowBox[{"curve", ",", "boundary", ",", "int"}], "]"}]}]}], 
+          "\[IndentingNewLine]", ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "count"}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "plist", "]"}]}]}], "]"}]}], "*)"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6771945102089257`*^9, 3.677194510869362*^9}, {
+   3.677194641591694*^9, 3.677194670328895*^9}, {3.677194925875699*^9, 
+   3.677194931171215*^9}, {3.677195001923936*^9, 3.6771950769668612`*^9}, {
+   3.677195569499759*^9, 3.6771955826461315`*^9}, {3.6771957098618264`*^9, 
+   3.6771957663952723`*^9}, {3.6772384142805047`*^9, 
+   3.6772384214218483`*^9}, {3.6772385031232576`*^9, 
+   3.6772386362922754`*^9}, {3.677239095905582*^9, 3.6772391192923717`*^9}, 
+   3.677239472641132*^9, {3.6772395188038716`*^9, 3.6772395526008043`*^9}, {
+   3.6772396068914843`*^9, 3.677239626626878*^9}, {3.6772398258862286`*^9, 
+   3.6772398818833222`*^9}, {3.6772399132220173`*^9, 
+   3.6772399707787943`*^9}, {3.6772400024164066`*^9, 
+   3.6772400933811073`*^9}, {3.677240165207882*^9, 3.6772402573124933`*^9}, {
+   3.6772403320642414`*^9, 3.6772403854684772`*^9}, {3.677240664064486*^9, 
+   3.6772407071523056`*^9}, 3.677240841522148*^9, {3.6772409035229206`*^9, 
+   3.6772409172528276`*^9}, {3.6772415531527214`*^9, 3.677241563163519*^9}, {
+   3.677241633709216*^9, 3.677241637612291*^9}, {3.677241922386962*^9, 
+   3.677241936632053*^9}, {3.6772420814749656`*^9, 3.677242180260337*^9}, {
+   3.6772425588582087`*^9, 3.677242562955427*^9}, {3.6772426014732637`*^9, 
+   3.6772426019963717`*^9}, {3.67724267596414*^9, 3.677242681628702*^9}, {
+   3.6772427136082797`*^9, 3.6772427208340807`*^9}, 3.6772428037547073`*^9, {
+   3.677242847469496*^9, 3.67724284915324*^9}, {3.677242889609294*^9, 
+   3.677242925014901*^9}, {3.6772430335051193`*^9, 3.677243037915394*^9}, {
+   3.677243070789073*^9, 3.6772430749163637`*^9}, {3.6772431932818594`*^9, 
+   3.677243197111951*^9}, {3.6772432747655935`*^9, 3.67724327742374*^9}, {
+   3.6772439523108864`*^9, 3.6772439573142157`*^9}, {3.6772439933929567`*^9, 
+   3.6772439959053936`*^9}, {3.677244289030117*^9, 3.6772442920400057`*^9}, 
+   3.677245229839217*^9, {3.6772509237373266`*^9, 3.6772509271304393`*^9}, {
+   3.677251394816123*^9, 3.677251404220025*^9}, {3.6772514766008725`*^9, 
+   3.677251481059415*^9}, {3.677251639331195*^9, 3.677251662055135*^9}, {
+   3.677251694468959*^9, 3.677251796504694*^9}, 3.67725191966077*^9, {
+   3.677329217933549*^9, 3.677329242273616*^9}, {3.677329325555614*^9, 
+   3.677329332499538*^9}, {3.677329911305997*^9, 3.6773299980800843`*^9}, 
+   3.6773300856421347`*^9, {3.677345812870285*^9, 3.6773458429005136`*^9}, {
+   3.67734588918106*^9, 3.677345966421598*^9}, {3.677413447236137*^9, 
+   3.677413475782205*^9}, {3.677413661260744*^9, 3.677413720098029*^9}, {
+   3.6774148839109106`*^9, 3.6774149152424746`*^9}, {3.677415285250079*^9, 
+   3.6774153137524376`*^9}, {3.6774157176927595`*^9, 
+   3.6774157371595716`*^9}, {3.6774158504010363`*^9, 
+   3.6774158671175413`*^9}, {3.6774159045942497`*^9, 
+   3.6774159519486094`*^9}, {3.6774159986062393`*^9, 3.677416025039837*^9}, {
+   3.6774160572530394`*^9, 3.677416073716592*^9}, {3.677417500417138*^9, 
+   3.6774175667011995`*^9}, 3.6774176035653715`*^9, {3.677418459766321*^9, 
+   3.677418487091118*^9}, 3.677418524603908*^9, {3.677418659545703*^9, 
+   3.677418682766426*^9}, 3.6774187527568464`*^9, 3.677419359216366*^9, {
+   3.677502544848818*^9, 3.677502545849654*^9}, {3.6775038249648685`*^9, 
+   3.677503977325228*^9}, {3.6778512056338253`*^9, 3.6778512318397903`*^9}, {
+   3.6778513361785097`*^9, 3.6778513665041995`*^9}, {3.6779481291223497`*^9, 
+   3.6779481886826763`*^9}, {3.677948218856764*^9, 3.6779482215497055`*^9}, {
+   3.677961304757321*^9, 3.6779613630326624`*^9}, {3.6779614130145054`*^9, 
+   3.6779614498652043`*^9}, {3.6779626078664527`*^9, 
+   3.6779626553251653`*^9}, {3.6779628128420467`*^9, 3.677962835828967*^9}, {
+   3.6779630346731443`*^9, 3.677963035437402*^9}, 3.6779630838135424`*^9, {
+   3.6781902186147375`*^9, 3.6781902880706673`*^9}, {3.6781906866106033`*^9, 
+   3.6781907513283377`*^9}, {3.6781915319422565`*^9, 
+   3.6781916837581854`*^9}, {3.6781918027096834`*^9, 3.678191952275595*^9}, {
+   3.6781922023973603`*^9, 3.6781922137156525`*^9}, 3.6781922479371376`*^9, {
+   3.678192533903305*^9, 3.6781925626836243`*^9}, {3.678193104704239*^9, 
+   3.6781932277324944`*^9}, {3.6781933448981247`*^9, 3.678193383672119*^9}, {
+   3.678193424597188*^9, 3.678193483091988*^9}, {3.678193793506575*^9, 
+   3.6781938416727724`*^9}, {3.6781951377918587`*^9, 3.678195192166344*^9}, {
+   3.6781955155838985`*^9, 3.6781955280720563`*^9}, {3.6781955605536675`*^9, 
+   3.678195579357029*^9}, {3.678195959115297*^9, 3.678195965524098*^9}, {
+   3.678196113706831*^9, 3.678196118425769*^9}, {3.678196151526881*^9, 
+   3.6781961833777385`*^9}, {3.678465550795788*^9, 3.67846556262611*^9}, {
+   3.6784701194266214`*^9, 3.6784701219250293`*^9}, {3.678470730423493*^9, 
+   3.678470754448267*^9}, {3.6784710461868362`*^9, 3.6784710983392987`*^9}, {
+   3.6784714842059355`*^9, 3.678471488079564*^9}, {3.6786196999880843`*^9, 
+   3.678619707637681*^9}, {3.6786212632760906`*^9, 3.678621328602132*^9}, 
+   3.6786214719558363`*^9, {3.6786223003577356`*^9, 3.678622346155752*^9}, {
+   3.6786223894654236`*^9, 3.6786224375456266`*^9}, {3.6786227644635487`*^9, 
+   3.678622786039497*^9}, {3.678623209937478*^9, 3.678623245807784*^9}, {
+   3.678623373925782*^9, 3.6786233789568954`*^9}, {3.6786235339105425`*^9, 
+   3.678623565589337*^9}, {3.6786262964910145`*^9, 3.6786263021002007`*^9}, {
+   3.678626407445213*^9, 3.6786264558162994`*^9}, {3.678626508392864*^9, 
+   3.678626663579291*^9}, {3.678626713413416*^9, 3.6786267366403885`*^9}, {
+   3.6786267808534985`*^9, 3.6786268085912313`*^9}, {3.6786268796318526`*^9, 
+   3.6786268880906982`*^9}, {3.6786269574812193`*^9, 
+   3.6786269579008036`*^9}, {3.6788035057852297`*^9, 
+   3.6788035470417376`*^9}, {3.67880360380553*^9, 3.6788036189134893`*^9}, {
+   3.678803652251875*^9, 3.67880368277691*^9}, {3.6788037191017704`*^9, 
+   3.6788037301669083`*^9}, {3.6788037629638233`*^9, 3.678803786408444*^9}, 
+   3.678803838849966*^9, {3.6788039149854527`*^9, 3.67880398870173*^9}, {
+   3.678805645006818*^9, 3.678805695491037*^9}, {3.6788059158424215`*^9, 
+   3.6788059390081253`*^9}, {3.6788059872454634`*^9, 
+   3.6788060092015066`*^9}, {3.679004748337159*^9, 3.6790047733728933`*^9}, {
+   3.6790054009924097`*^9, 3.679005443489145*^9}, {3.679005476862082*^9, 
+   3.679005558396109*^9}, {3.679005792529076*^9, 3.6790058147452583`*^9}, {
+   3.6790058649161897`*^9, 3.6790058657373953`*^9}, {3.67900598338769*^9, 
+   3.679006020964691*^9}, {3.6790062811404066`*^9, 3.6790063302161736`*^9}, {
+   3.67900638341045*^9, 3.679006386775674*^9}, {3.6790064225945435`*^9, 
+   3.6790064859988575`*^9}, {3.679006661656296*^9, 3.679006695262632*^9}, {
+   3.679006748825514*^9, 3.6790067826890416`*^9}, {3.679006847785968*^9, 
+   3.6790068709476995`*^9}, {3.6790075268372383`*^9, 
+   3.6790075314913397`*^9}, {3.6790103600445623`*^9, 3.679010462100299*^9}, {
+   3.679011064752967*^9, 3.679011083671277*^9}, {3.6790113409585395`*^9, 
+   3.6790113411938934`*^9}, {3.6790113775902834`*^9, 
+   3.6790113982680573`*^9}, {3.679012730793296*^9, 3.6790127981139297`*^9}, 
+   3.679012963119549*^9, {3.6790131360251284`*^9, 3.6790131496268373`*^9}, {
+   3.679013207774451*^9, 3.6790132493026023`*^9}, {3.679014882949864*^9, 
+   3.679014943847558*^9}, {3.679016082319982*^9, 3.6790161384535055`*^9}, {
+   3.6790162929498105`*^9, 3.679016407520484*^9}, {3.679016439274433*^9, 
+   3.67901645008533*^9}, {3.679017853345199*^9, 3.6790179032113647`*^9}, {
+   3.679018127359892*^9, 3.679018192417471*^9}, {3.679018227461069*^9, 
+   3.679018274943017*^9}, {3.6790183516765776`*^9, 3.67901835384943*^9}, {
+   3.679018387227447*^9, 3.679018474850913*^9}, {3.679018979145896*^9, 
+   3.679018992549617*^9}, {3.679019023684577*^9, 3.679019077645691*^9}, {
+   3.6790199646521573`*^9, 3.679019994083563*^9}, {3.6790200555636063`*^9, 
+   3.679020073874299*^9}, {3.6790201524149747`*^9, 3.67902019226785*^9}, {
+   3.6790202394511285`*^9, 3.6790203038164387`*^9}, {3.6790539268321877`*^9, 
+   3.679053972821106*^9}, {3.679054794987726*^9, 3.679054809849253*^9}, {
+   3.6791859926362877`*^9, 3.679186030948584*^9}, {3.6791863154367046`*^9, 
+   3.6791864262433214`*^9}, {3.6791864595535145`*^9, 
+   3.6791864677856297`*^9}, {3.679186588003376*^9, 3.6791866074805937`*^9}, {
+   3.6791866670050683`*^9, 3.6791866952975054`*^9}, {3.679186786439439*^9, 
+   3.6791867872103014`*^9}, {3.6791868406508665`*^9, 3.679186843984622*^9}, {
+   3.679187085270274*^9, 3.6791871134033537`*^9}, 3.6791872073695765`*^9, 
+   3.6791872966414638`*^9, {3.679188236665369*^9, 3.6791882381961627`*^9}, {
+   3.6791887766245885`*^9, 3.679188785905116*^9}, {3.679188902200653*^9, 
+   3.679188906959118*^9}, {3.6791890763961115`*^9, 3.679189081784073*^9}, 
+   3.6791891435265303`*^9, {3.679189399373181*^9, 3.679189428832739*^9}, 
+   3.679189577285184*^9, {3.679189723725199*^9, 3.6791897263076296`*^9}, {
+   3.6791902558383627`*^9, 3.6791902854760733`*^9}, {3.6791903344506435`*^9, 
+   3.6791903503407154`*^9}, {3.6791903916935472`*^9, 3.679190392713358*^9}, {
+   3.6791904676453686`*^9, 3.679190467902691*^9}, {3.6791905678280687`*^9, 
+   3.679190568782467*^9}, {3.6791907144759502`*^9, 3.679190765453126*^9}, {
+   3.679191053687449*^9, 3.6791910846586*^9}, {3.6791911503917274`*^9, 
+   3.679191163314515*^9}, {3.6791912003815503`*^9, 3.679191204386885*^9}, {
+   3.6791912788933926`*^9, 3.6791913003215866`*^9}, 3.679191923387207*^9, {
+   3.6792283440443993`*^9, 3.6792283650330954`*^9}, {3.679229574021886*^9, 
+   3.6792296071746902`*^9}, {3.679229799584012*^9, 3.679229802680982*^9}, {
+   3.679229865948371*^9, 3.679229888575871*^9}, {3.6792299396113544`*^9, 
+   3.6792299442022448`*^9}, {3.679230344561328*^9, 3.679230355595937*^9}, {
+   3.6792303876784744`*^9, 3.6792304721607504`*^9}, {3.679232422954604*^9, 
+   3.67923242619989*^9}, {3.6792336184648504`*^9, 3.679233684375244*^9}, {
+   3.6792337832256727`*^9, 3.6792338222997866`*^9}, {3.6792340411630163`*^9, 
+   3.6792340472303085`*^9}, {3.6792341000036974`*^9, 
+   3.6792341031251554`*^9}, {3.679234143428359*^9, 3.6792341449102182`*^9}, {
+   3.6792343681166573`*^9, 3.6792343690787654`*^9}, {3.679234406132622*^9, 
+   3.679234421508547*^9}, {3.679234527922286*^9, 3.6792345280074315`*^9}, 
+   3.6792345970042577`*^9, {3.6792349443966417`*^9, 3.679234944781029*^9}, {
+   3.6792350995287514`*^9, 3.679235113070943*^9}, {3.67923539297348*^9, 
+   3.6792354266099625`*^9}, {3.6792356393438096`*^9, 3.679235643326332*^9}, {
+   3.6792357903208714`*^9, 3.6792357909097652`*^9}, {3.67923683028327*^9, 
+   3.6792368338169947`*^9}, {3.6792368744708824`*^9, 3.679236880074568*^9}, {
+   3.679236914712325*^9, 3.679236915180888*^9}, {3.6792369584500074`*^9, 
+   3.679236994105383*^9}, {3.6792372410457387`*^9, 3.6792372485674706`*^9}, {
+   3.6792373278918123`*^9, 3.6792373360983105`*^9}, {3.679237380406127*^9, 
+   3.6792373809101906`*^9}, {3.679239595553287*^9, 3.679239630296262*^9}, {
+   3.6792397268128395`*^9, 3.6792397402783103`*^9}, {3.6792397940371513`*^9, 
+   3.679239808314582*^9}, {3.679239981752428*^9, 3.6792400180750446`*^9}, 
+   3.6792403180094137`*^9, {3.6792415927415*^9, 3.679241607218746*^9}, 
+   3.679242780849934*^9, {3.6792723302557645`*^9, 3.679272392049095*^9}, {
+   3.6792765856421385`*^9, 3.6792765887693644`*^9}, {3.679277019880348*^9, 
+   3.6792770329816566`*^9}, {3.6792770654052634`*^9, 
+   3.6792771393179226`*^9}, {3.6792777837774115`*^9, 
+   3.6792778075272923`*^9}, {3.679278128103759*^9, 3.6792781311219053`*^9}, {
+   3.67927889756236*^9, 3.6792789175171075`*^9}, {3.679279114684211*^9, 
+   3.6792791985403605`*^9}, {3.6792793743625593`*^9, 3.679279406732766*^9}, 
+   3.6792794620453134`*^9, {3.6793166772953234`*^9, 3.6793167031740136`*^9}, {
+   3.679318051399499*^9, 3.679318067061635*^9}, {3.679318116924512*^9, 
+   3.679318256851365*^9}, {3.679318364505365*^9, 3.67931848731469*^9}, {
+   3.6793185810868545`*^9, 3.6793186131400394`*^9}, {3.679318688349023*^9, 
+   3.6793187029982977`*^9}, {3.679318755825336*^9, 3.6793187762240715`*^9}, {
+   3.6793190336425447`*^9, 3.679319061677083*^9}, {3.679319117092164*^9, 
+   3.679319166366051*^9}, {3.679319237072979*^9, 3.679319291251384*^9}, {
+   3.6793193282060413`*^9, 3.6793193607338514`*^9}, {3.6793193956169176`*^9, 
+   3.6793194062961493`*^9}, {3.6793202197314377`*^9, 
+   3.6793202500997553`*^9}, {3.6793206202295628`*^9, 3.679320624178134*^9}, {
+   3.6793206864666605`*^9, 3.6793209439931526`*^9}, {3.679321212884343*^9, 
+   3.6793214335008316`*^9}, {3.6793274212461686`*^9, 3.679327423445176*^9}, {
+   3.67933287468075*^9, 3.6793328748463135`*^9}, {3.679344292853058*^9, 
+   3.679344332169473*^9}, {3.679344427631483*^9, 3.6793444294711514`*^9}, {
+   3.679344505999173*^9, 3.6793445413697453`*^9}, {3.679344826791312*^9, 
+   3.679344891330985*^9}, {3.679345281264934*^9, 3.6793452860454245`*^9}, {
+   3.679346391852128*^9, 3.6793464320594287`*^9}, 3.679346614725871*^9, {
+   3.6793467209254985`*^9, 3.679346734702803*^9}, {3.679346843256857*^9, 
+   3.6793468773744416`*^9}, {3.6793469185445623`*^9, 3.6793470308473625`*^9}, 
+   3.6793476305526614`*^9, {3.679347669587553*^9, 3.67934771216187*^9}, {
+   3.679347774961174*^9, 3.679347842455869*^9}, {3.6793479154621572`*^9, 
+   3.679347934341878*^9}, {3.679347967800608*^9, 3.6793479763174553`*^9}, {
+   3.6793480089223375`*^9, 3.6793480138651733`*^9}, {3.6793480983033166`*^9, 
+   3.6793481055037017`*^9}, {3.679348691691343*^9, 3.679348762810475*^9}, {
+   3.679349145593625*^9, 3.679349162047551*^9}, {3.679349364876872*^9, 
+   3.6793494893360634`*^9}, {3.6793495408937283`*^9, 3.679349564284284*^9}, {
+   3.679349731732071*^9, 3.6793497422714815`*^9}, {3.679349865712695*^9, 
+   3.679349865961257*^9}, {3.679349941147621*^9, 3.679349950481798*^9}, {
+   3.6793500408505*^9, 3.6793500439312134`*^9}, {3.679350547663822*^9, 
+   3.6793505817195625`*^9}, {3.6793506623557405`*^9, 
+   3.6793506802507553`*^9}, {3.6793507182487154`*^9, 
+   3.6793507277843423`*^9}, {3.6793507649271793`*^9, 3.679350767323177*^9}, {
+   3.6793509399775057`*^9, 3.6793509512212954`*^9}, {3.6793510254169827`*^9, 
+   3.679351029348645*^9}, {3.6793510610988674`*^9, 3.6793511260097275`*^9}, {
+   3.6793512023825254`*^9, 3.6793512106566544`*^9}, {3.6793512933738117`*^9, 
+   3.6793513556508656`*^9}, {3.6793513983467016`*^9, 3.679351398593151*^9}, {
+   3.6793514614550357`*^9, 3.6793515075263543`*^9}, {3.6793515431600847`*^9, 
+   3.679351547362114*^9}, {3.6793515950836143`*^9, 3.679351606769446*^9}, {
+   3.6793516540651827`*^9, 3.679351679545066*^9}, {3.6793517489332037`*^9, 
+   3.679351755232483*^9}, {3.6793518040373373`*^9, 3.679351835580619*^9}, {
+   3.679351883608915*^9, 3.679351886805925*^9}, {3.679351930178793*^9, 
+   3.6793520141228228`*^9}, {3.679352045663822*^9, 3.679352051427533*^9}, {
+   3.679352084260455*^9, 3.6793520944404173`*^9}, {3.679352279375269*^9, 
+   3.679352281081832*^9}, {3.6793539399052057`*^9, 3.679353961975387*^9}, {
+   3.67935550878329*^9, 3.6793555522945857`*^9}, {3.6793568689355564`*^9, 
+   3.6793569017684727`*^9}, {3.679356959880109*^9, 3.6793570483883677`*^9}, {
+   3.679357098615388*^9, 3.6793571223518133`*^9}, {3.679357190822297*^9, 
+   3.6793572338009834`*^9}, {3.6793572877924757`*^9, 3.679357412263995*^9}, {
+   3.679357470905354*^9, 3.6793575567684727`*^9}, {3.6793575909101696`*^9, 
+   3.6793577048938584`*^9}, {3.679357746280449*^9, 3.6793577746720905`*^9}, {
+   3.679357805121097*^9, 3.679357822030901*^9}, {3.6793580959405594`*^9, 
+   3.67935814837416*^9}, {3.679404213408619*^9, 3.679404216461233*^9}, {
+   3.6820880956702456`*^9, 3.6820881036241555`*^9}, {3.6820881879433947`*^9, 
+   3.6820882115919385`*^9}}]
+},
+WindowSize->{1596, 817},
+WindowMargins->{{Automatic, -4}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 130687, 2936, 8828, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

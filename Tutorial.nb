@@ -1,0 +1,824 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     37210,        815]
+NotebookOptionsPosition[     36711,        796]
+NotebookOutlinePosition[     37058,        811]
+CellTagsIndexPosition[     37015,        808]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "This", " ", "is", " ", "a", " ", "nice", " ", "helper", " ", "line", " ", 
+    "that", " ", "shows", " ", "how", " ", "long", " ", "the", " ", "cell", 
+    " ", "takes", " ", "to", " ", 
+    RowBox[{"execute", ".", " ", "It"}], " ", "is", " ", "great", " ", "for", 
+    " ", "determining", " ", "whether", " ", "improvements", " ", "to", " ", 
+    "the", " ", "algorithm", " ", "actually", " ", "improve", " ", 
+    RowBox[{"runtime", "."}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"SetOptions", "[", 
+    RowBox[{"$FrontEndSession", ",", 
+     RowBox[{
+     "EvaluationCompletionAction", "\[Rule]", "\"\<ShowTiming\>\""}]}], "]"}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "The", " ", "first", " ", "thing", " ", "we", " ", "need", " ", "to", " ",
+      "do", " ", "is", " ", "define", " ", "our", " ", 
+     RowBox[{"surface", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f", "[", "r_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"r", "^", "2"}]}], ")"}], "^", 
+     RowBox[{"(", "1", ")"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g", "[", "r_", "]"}], ":=", "r"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Next", ",", " ", 
+     RowBox[{"we", " ", "need", " ", "to", " ", "define", " ", "the", " ", 
+      RowBox[{"boundary", ".", " ", "All"}], " ", "boundary", " ", 
+      "components", " ", "should", " ", "be", " ", "of", " ", "the", " ", 
+      "form", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"u", "\[Rule]", " ", 
+          RowBox[{"__somePureFunction", "__"}]}], ",", 
+         RowBox[{"v", "\[Rule]", 
+          RowBox[{"__someOtherPureFunction", "__"}]}]}], "}"}], "."}]}]}], 
+    " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"The", " ", "first", " ", "built"}], "-", 
+      RowBox[{
+      "in", " ", "curve", " ", "generator", " ", "is", " ", "for", " ", 
+       RowBox[{"parallels", ".", " ", "The"}], " ", "function", " ", 
+       RowBox[{"getParallel", "[", 
+        RowBox[{"v0", ",", "u0"}], "]"}], " ", "returns", " ", "a", " ", 
+       "parallel", " ", "at", " ", "height", " ", "v0", " ", "where", " ", 
+       "t"}]}], "=", 
+     RowBox[{
+     "0", " ", "corresponds", " ", "to", " ", "the", " ", "angle", " ", 
+      RowBox[{"u0", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"bottom", "=", 
+     RowBox[{"getParallel", "[", 
+      RowBox[{"0", ",", "0"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"The", " ", "next", " ", "built"}], "-", 
+       RowBox[{"in", " ", "curve", " ", "generator", " ", 
+        RowBox[{"(", 
+         RowBox[{
+         "and", " ", "the", " ", "more", " ", "interesting", " ", "one"}], 
+         ")"}], " ", "is", " ", "for", " ", 
+        RowBox[{"geodesics", ".", " ", "The"}], " ", "function", " ", 
+        RowBox[{"geodesicSolve", "[", 
+         RowBox[{"u0", ",", "v0", ",", "\[Theta]"}], "]"}], " ", "gives", " ",
+         "a", " ", "geodesic", " ", "on", " ", "the", " ", "surface", " ", 
+        "where", " ", "t"}]}], "=", 
+      RowBox[{
+      "0", " ", "corresponds", " ", "to", " ", "the", " ", "point", " ", 
+       RowBox[{"(", 
+        RowBox[{"u0", ",", "v0"}], ")"}], " ", "in", " ", "the", " ", 
+       "coordinate", " ", "system", " ", "of", " ", "the", " ", "surface"}]}],
+      ",", " ", 
+     RowBox[{
+     "and", " ", "the", " ", "angle", " ", "from", " ", "a", " ", "parallel", 
+      " ", "at", " ", "that", " ", "point", " ", "is", " ", 
+      RowBox[{"\[Theta]", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"top", "=", 
+     RowBox[{"geodesicSolve", "[", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"Pi", "/", "4"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Next", ",", " ", 
+     RowBox[{
+     "we", " ", "need", " ", "to", " ", "know", " ", "how", " ", "long", " ", 
+      "each", " ", "boundary", " ", "component", " ", "is", " ", "going", " ",
+       "to", " ", 
+      RowBox[{"be", ".", " ", "In"}], " ", "this", " ", "example"}], ",", " ", 
+     RowBox[{
+     "we", " ", "have", " ", "only", " ", "two", " ", "boundary", " ", 
+      "components"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+      "and", " ", "we", " ", "already", " ", "they", " ", "intersect", " ", 
+       "when", " ", "t"}], "=", 
+      RowBox[{"0", " ", "on", " ", "both", " ", 
+       RowBox[{"curves", ".", " ", "To"}], " ", "find", " ", "the", " ", 
+       "other", " ", "point", " ", "where", " ", "they", " ", "intersect", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"more", " ", "importantly"}], ",", " ", 
+         RowBox[{
+          RowBox[{"the", " ", "t"}], "-", 
+          RowBox[{
+          "values", " ", "of", " ", "each", " ", "curve", " ", "where", " ", 
+           "this", " ", "intersection", " ", "occurs"}]}]}], ")"}]}]}], ",", 
+     " ", 
+     RowBox[{"we", " ", "use", " ", 
+      RowBox[{
+       RowBox[{"getIntersect", "[", 
+        RowBox[{
+        "curve1", ",", "curve2", ",", "guessForCurve1", ",", 
+         "guessForCurve2"}], "]"}], ".", " ", 
+       RowBox[{"It", "'"}]}], "s", " ", "important", " ", "to", " ", "make", 
+      " ", "sure", " ", "the", " ", "guess", " ", "is", " ", "pretty", " ", 
+      "close"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+      "or", " ", "else", " ", "it", " ", "might", " ", "just", " ", "throw", 
+       " ", "us", " ", "back", " ", "the", " ", "t"}], "=", 
+      RowBox[{"0", " ", "intersect"}]}], ",", " ", "which", ",", " ", 
+     RowBox[{"while", " ", "correct"}], ",", " ", 
+     RowBox[{"is", " ", 
+      RowBox[{"unhelpful", ".", "It"}], " ", "may", " ", "be", " ", "worth", 
+      " ", "printing", " ", "out", " ", "the", " ", "intersection", " ", 
+      "just", " ", "to", " ", "make", " ", "sure", " ", "that", " ", "the", 
+      " ", "values", " ", "look", " ", "vaguely", " ", "how", " ", "we", " ", 
+      "expected", " ", "them", " ", 
+      RowBox[{"to", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"boundaryInt", "=", 
+     RowBox[{"getIntersect", "[", 
+      RowBox[{"bottom", ",", "top", ",", "2", ",", "2"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "The", " ", "return", " ", "type", " ", "of", " ", "getIntersect", " ", 
+       "is", " ", "of", " ", "the", " ", "form", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"t", "\[Rule]", 
+          RowBox[{"__tCoordinateOfFirstCurve", "__"}]}], ",", 
+         RowBox[{"t2", "\[Rule]", "tCoordinateOfSecondCurve__"}]}], "}"}], 
+       " ", "so", " ", "to", " ", "access", " ", "these", " ", "values", " ", 
+       "one", " ", "can", " ", "use", " ", "t"}], "/.", 
+      RowBox[{
+       RowBox[{"int", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], " ", "and", " ", "t2"}]}], "/.", 
+     RowBox[{
+      RowBox[{"int", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], " ", "where", " ", "int", " ", "is", 
+      " ", "the", " ", "name", " ", "of", " ", "the", " ", 
+      RowBox[{"intersection", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Before", " ", "we", " ", "can", " ", "calculate", " ", "any", " ", 
+      "orbits"}], ",", " ", 
+     RowBox[{
+     "we", " ", "need", " ", "to", " ", "explicitly", " ", "tell", " ", 
+      "Mathematica", " ", "what", " ", "defines", " ", "our", " ", 
+      RowBox[{"table", "'"}], "s", " ", 
+      RowBox[{"boundary", ".", " ", "This"}], " ", "is", " ", "given", " ", 
+      "by", " ", "a", " ", "list", " ", "of", " ", 
+      RowBox[{"triples", ".", " ", "Each"}], " ", "triple", " ", "contains", 
+      " ", "the", " ", "bounday", " ", "component", " ", 
+      RowBox[{"(", 
+       RowBox[{"a", " ", "curve"}], ")"}]}], ",", " ", 
+     RowBox[{
+     "and", " ", "the", " ", "minimum", " ", "and", " ", "maximum", " ", "t", 
+      " ", "values", " ", "that", " ", "define", " ", "the", " ", "curve", 
+      " ", "segment", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"real", " ", "numbers"}], ")"}], ".", " ", "So"}], " ", "in", 
+      " ", "this", " ", "example"}], ",", " ", 
+     RowBox[{
+     "even", " ", "though", " ", "the", " ", "curve", " ", "\"\<bottom\>\"", 
+      " ", "really", " ", "goes", " ", "all", " ", "the", " ", "way", " ", 
+      "around", " ", "the", " ", "parallel"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+      "its", " ", "use", " ", "as", " ", "a", " ", "boundary", " ", 
+       "component", " ", "is", " ", "only", " ", "between", " ", "t"}], "=", 
+      RowBox[{
+      "0", " ", "and", " ", "the", " ", "t", " ", "value", " ", "we", " ", 
+       "found", " ", "from", " ", "the", " ", 
+       RowBox[{"intersect", "."}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tutorialBoundaries", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"bottom", ",", "0", ",", 
+         RowBox[{"t", "/.", 
+          RowBox[{"boundaryInt", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"top", ",", "0", ",", 
+         RowBox[{"t2", "/.", 
+          RowBox[{"boundaryInt", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}]}], "}"}]}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.679332910704872*^9, 3.679333031181378*^9}, {
+  3.679333076095561*^9, 3.6793331226715107`*^9}, {3.6793331672846394`*^9, 
+  3.679333185474246*^9}, {3.679333217899081*^9, 3.679333298050121*^9}, {
+  3.6793333340089617`*^9, 3.6793334817647223`*^9}, {3.6793335149364805`*^9, 
+  3.6793338363315153`*^9}, {3.679334371505225*^9, 3.6793348373828344`*^9}, {
+  3.679335141874879*^9, 3.6793351548001356`*^9}, {3.679335202364962*^9, 
+  3.6793353055256147`*^9}, {3.679335405947781*^9, 3.679335435014824*^9}, {
+  3.679360980094902*^9, 3.679360990780655*^9}, {3.6793624434619074`*^9, 
+  3.6793624472556324`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"At", " ", "long", " ", "last"}], ",", " ", 
+    RowBox[{
+    "we", " ", "are", " ", "finally", " ", "ready", " ", "to", " ", 
+     "calculate", " ", "and", " ", "view", " ", "some", " ", 
+     RowBox[{"orbits", ".", " ", "We"}], " ", "will", " ", "start", " ", 
+     "with", " ", "one", " ", 
+     RowBox[{"orbit", ".", " ", "To"}], " ", "construct", " ", "an", " ", 
+     "orbit"}], ",", " ", 
+    RowBox[{"we", " ", "need", " ", "a", " ", "starting", " ", 
+     RowBox[{"trajectory", ".", " ", "A"}], " ", "useful", " ", "way", " ", 
+     "to", " ", "create", " ", "a", " ", "starting", " ", "trajectory", " ", 
+     "is", " ", "with", " ", 
+     RowBox[{"TrajectoryFromBoundary", "[", 
+      RowBox[{"boundary", ",", "t", ",", "angle"}], "]"}], " ", "which", " ", 
+     "gives", " ", "a", " ", "geodesic", " ", 
+     RowBox[{"(", 
+      RowBox[{"a", " ", "trajectory"}], ")"}], " ", "that", " ", "starts", 
+     " ", "on", " ", "the", " ", "boundary", " ", "component", " ", "at", " ",
+      "the", " ", "given", " ", "t", " ", "value"}], ",", " ", 
+    RowBox[{
+    "and", " ", "makes", " ", "the", " ", "given", " ", "angle", " ", "with", 
+     " ", "that", " ", "boundary", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"not", " ", "with", " ", "a", " ", "parallel"}], ",", " ", 
+        RowBox[{"as", " ", "in", " ", "geodesicSolve"}]}], ")"}], ".", " ", 
+      "In"}], " ", "this", " ", "example"}], ",", " ", 
+    RowBox[{
+     RowBox[{"we", "'"}], "ve", " ", "created", " ", "our", " ", "starting", 
+     " ", "trajectory", " ", 
+     RowBox[{"(", 
+      RowBox[{"named", " ", "billiard1"}], ")"}], " ", "that", " ", "starts", 
+     " ", "on", " ", "the", " ", "bottom", " ", "component"}], ",", " ", 
+    RowBox[{
+    "halfway", " ", "between", " ", "the", " ", "two", " ", "corners"}], ",", 
+    " ", 
+    RowBox[{"and", " ", "makes", " ", "angle", " ", 
+     RowBox[{"Pi", "/", "4"}], " ", "with", " ", "the", " ", "bottom", " ", 
+     RowBox[{"component", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"billiard1", ":=", 
+     RowBox[{"TrajectoryFromBoundary", "[", 
+      RowBox[{"bottom", ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"t", "/.", 
+          RowBox[{"boundaryInt", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "/", "2"}], ",", 
+       RowBox[{"Pi", "/", "4"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "To", " ", "create", " ", "a", " ", "large", " ", "number", " ", "of", 
+      " ", "trajectories", " ", "on", " ", "an", " ", "orbit"}], ",", " ", 
+     RowBox[{
+      RowBox[{"we", "'"}], "ll", " ", "use", " ", 
+      RowBox[{
+       RowBox[{"guessTrajectoryListFinal", "[", 
+        RowBox[{
+        "startingTrajectory", ",", "numberOfTrajectories", ",", 
+         "boundaryList"}], "]"}], ".", " ", "The"}], " ", "first", " ", 
+      "intersect", " ", "found", " ", "will", " ", "be", " ", "the", " ", 
+      "one", " ", "after", " ", "the", " ", "starting", " ", "trajectory", 
+      " ", "intersects", " ", "a", " ", "boundary", " ", "component"}], ",", 
+     " ", 
+     RowBox[{
+     "so", " ", "the", " ", "initial", " ", "information", " ", "of", " ", 
+      "the", " ", "starting", " ", "trajectory", " ", "will", " ", "be", " ", 
+      RowBox[{"lost", ".", " ", "The"}], " ", "program", " ", "will", " ", 
+      "calculate", " ", "some", " ", "number", " ", "of", " ", "trajectories",
+       " ", "as", " ", "specified"}], ",", " ", 
+     RowBox[{"and", " ", "for", " ", "this"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+      "it", " ", "needs", " ", "to", " ", "have", " ", "information", " ", 
+       "about", " ", "the", " ", "boundary", " ", "of", " ", "the", " ", 
+       "table", " ", 
+       RowBox[{"(", 
+        RowBox[{
+        "which", " ", "is", " ", "why", " ", "we", " ", "compiled", " ", "it",
+          " ", 
+         RowBox[{"earlier", "."}]}], ")"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", "This", " ", "program", " ", "may", " ", "take",
+        " ", "some", " ", "time", " ", "to", " ", 
+       RowBox[{"run", ".", " ", "It"}], " ", "should", " ", "print", " ", 
+       "out", " ", "a", " ", "ticker", " ", "with", " ", "the", " ", "number",
+        " ", "of", " ", "trajectories", " ", "calculated", " ", "so", " ", 
+       RowBox[{"far", ".", " ", "It"}], " ", "may", " ", "be", " ", "about", 
+       " ", "5"}], "-", 
+      RowBox[{"10", " ", "seconds", " ", "per", " ", "trajectories"}]}], ",", 
+     " ", 
+     RowBox[{
+     "especially", " ", "if", " ", "your", " ", "boundary", " ", "has", " ", 
+      "many", " ", "components", " ", "or", " ", "your", " ", "table", " ", 
+      "is", " ", "large"}], ",", " ", 
+     RowBox[{"so", " ", "please", " ", "be", " ", 
+      RowBox[{"patient", ".", " ", "Many"}], " ", "warnings", " ", "may", " ",
+       "be", " ", "printed", " ", "out", " ", "about", " ", "various", " ", 
+      "problems", " ", "encountered"}], ",", " ", 
+     RowBox[{
+     "but", " ", "so", " ", "long", " ", "as", " ", "the", " ", "ticker", " ",
+       "continues", " ", "to", " ", "increase"}], ",", " ", 
+     RowBox[{"these", " ", "can", " ", "be", " ", "safely", " ", 
+      RowBox[{"ignored", ".", " ", "They"}], " ", "spawn", " ", "from", " ", 
+      "the", " ", "program", " ", "trying", " ", "to", " ", "find", " ", 
+      "where", " ", "the", " ", "next", " ", "intersection", " ", "is", " ", 
+      "going", " ", "to", " ", 
+      RowBox[{"be", ".", " ", "If"}], " ", "searching", " ", "in", " ", "the",
+       " ", "wrong", " ", "area", " ", 
+      RowBox[{"(", 
+       RowBox[{"so", " ", "to", " ", "speak"}], ")"}]}], ",", " ", 
+     RowBox[{
+     "it", " ", "may", " ", "give", " ", "up", " ", "and", " ", "throw", " ", 
+      "an", " ", 
+      RowBox[{"error", ".", " ", "Luckily"}]}], ",", " ", 
+     RowBox[{"since", " ", 
+      RowBox[{"we", "'"}], "re", " ", "looking", " ", "all", " ", "over", " ",
+       "the", " ", "place"}], ",", " ", 
+     RowBox[{
+     "we", " ", "only", " ", "need", " ", "one", " ", "of", " ", "them", " ", 
+      "to", " ", "work", " ", "out"}], ",", " ", 
+     RowBox[{"and", " ", "this", " ", "usually", " ", "does", " ", 
+      RowBox[{"occur", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"makeTrajectories", "=", 
+     RowBox[{"guessTrajectoryListFinal", "[", 
+      RowBox[{"billiard1", ",", "35", ",", "tutorialBoundaries"}], "]"}]}], 
+    ";"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Welcome", " ", 
+      RowBox[{"back", "!"}], " ", "Thank", " ", "you", " ", "for", " ", 
+      "waiting", " ", "for", " ", "your", " ", "code", " ", "to", " ", 
+      RowBox[{"run", ".", " ", "Now"}], " ", "we", " ", "can", " ", "analyze",
+       " ", "our", " ", "hard", " ", 
+      RowBox[{"day", "'"}], "s", " ", 
+      RowBox[{"work", ".", " ", "There"}], " ", "are", " ", "two", " ", 
+      "primary", " ", "things", " ", "we", " ", "can", " ", "do", " ", "with",
+       " ", "our", " ", 
+      RowBox[{"data", ".", " ", "First"}]}], ",", " ", 
+     RowBox[{"we", " ", "can", " ", "draw", " ", 
+      RowBox[{"pictures", ".", " ", "When"}], " ", "drawing", " ", 
+      "pictures"}], ",", " ", 
+     RowBox[{
+     "we", " ", "need", " ", "to", " ", "display", " ", "three", " ", 
+      "different", " ", 
+      RowBox[{"things", ":", " ", "trajectories"}]}], ",", " ", "boundaries", 
+     ",", " ", 
+     RowBox[{"and", " ", "the", " ", "surface", " ", 
+      RowBox[{"itself", ".", " ", "We"}], " ", "can", " ", "get", " ", "the", 
+      " ", "pictures", " ", "of", " ", "the", " ", "trajectories", " ", "and",
+       " ", "boundaries", " ", "easily", " ", 
+      RowBox[{"(", 
+       RowBox[{
+       "using", " ", "the", " ", "trajectories", " ", "we", " ", "just", " ", 
+        "calculated", " ", "and", " ", "the", " ", "list", " ", "of", " ", 
+        "boundary", " ", "information", " ", "from", " ", "earlier"}], ")"}], 
+      " ", "and", " ", "we", " ", "can", " ", "get", " ", "a", " ", "picture",
+       " ", "of", " ", "the", " ", "surface", " ", "from", " ", 
+      RowBox[{"SurfacePlot", "[", 
+       RowBox[{"f", ",", "g", ",", "vmin", ",", "vmax"}], "]"}], " ", "which",
+       " ", "plots", " ", "the", " ", "surface", " ", "between", " ", "the", 
+      " ", "given", " ", "values", " ", "of", " ", 
+      RowBox[{"v", ".", " ", "To"}], " ", "show", " ", "all", " ", "of", " ", 
+      "this"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+      "we", " ", "wrap", " ", "the", " ", "surface", " ", "plot", " ", "in", 
+       " ", "a", " ", "one"}], "-", 
+      RowBox[{"element", " ", "list"}]}], ",", 
+     RowBox[{"and", " ", "join", " ", "the", " ", "three", " ", 
+      RowBox[{"lists", ".", " ", "Then"}], " ", "Show", " ", "will", " ", 
+      "display", " ", "the", " ", "final", " ", "work", " ", "of", " ", 
+      RowBox[{"art", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"trajlist", "=", 
+     RowBox[{"TrajectoryPictures", "[", "makeTrajectories", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"boundaryList", "=", 
+     RowBox[{"BoundaryPictures", "[", "tutorialBoundaries", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Show", "[", 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"SurfacePlot", "[", 
+        RowBox[{"f", ",", "g", ",", 
+         RowBox[{"-", "1"}], ",", "1"}], "]"}], "}"}], ",", "trajlist", ",", 
+      "boundaryList"}], "]"}], "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Next", ",", " ", 
+     RowBox[{
+     "we", " ", "may", " ", "want", " ", "to", " ", "see", " ", "where", " ", 
+      "the", " ", "points", " ", "on", " ", "our", " ", "boundary", " ", 
+      "landed", " ", "in", " ", "the", " ", "phase", " ", 
+      RowBox[{"space", ".", " ", "This"}], " ", "method", " ", "displays", 
+      " ", "a", " ", "number", " ", "of", " ", "2", "D", " ", "plots"}], ",", 
+     " ", 
+     RowBox[{
+      RowBox[{"one", " ", "for", " ", "each", " ", "boundary", " ", 
+       RowBox[{"component", ".", " ", "Each"}], " ", "has", " ", "the", " ", 
+       "x"}], "-", 
+      RowBox[{"axis", " ", "as", " ", "the", " ", "t"}], "-", 
+      RowBox[{
+      "value", " ", "along", " ", "the", " ", "boundary", " ", 
+       "component"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"and", " ", "the", " ", "y"}], "-", 
+      RowBox[{
+      "axis", " ", "as", " ", "the", " ", "angle", " ", "from", " ", "the", 
+       " ", "boundary"}]}], ",", " ", 
+     RowBox[{"scaled", " ", "to", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"0", ",", "1"}], ")"}], ".", " ", "The"}], " ", "true", " ", 
+      "phase", " ", "space", " ", "would", " ", "have", " ", "these", " ", 
+      "all", " ", "plotted", " ", "together", " ", "side", " ", "to", " ", 
+      "side"}], ",", " ", 
+     RowBox[{
+     "but", " ", "patterns", " ", "may", " ", "be", " ", "easier", " ", "to", 
+      " ", "see", " ", "if", " ", "each", " ", "boundary", " ", "component", 
+      " ", "gets", " ", "its", " ", "own", " ", 
+      RowBox[{"graph", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MakeAndShowPhaseSpace", "[", 
+     RowBox[{"makeTrajectories", ",", "tutorialBoundaries"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "can", " ", "also", " ", "calculate", " ", "many", " ", 
+      "orbits", " ", "at", " ", "the", " ", "same", " ", "time", " ", "to", 
+      " ", "get", " ", "a", " ", "more", " ", "complete", " ", "picture", " ",
+       "of", " ", "the", " ", "phase", " ", 
+      RowBox[{"space", ".", " ", "To"}], " ", "do", " ", "this"}], ",", " ", 
+     RowBox[{"we", " ", "simply", " ", "make", " ", "a", " ", "list"}], ",", 
+     " ", 
+     RowBox[{
+     "where", " ", "each", " ", "list", " ", "item", " ", "is", " ", "itself",
+       " ", "a", " ", "long", " ", "list", " ", "of", " ", 
+      RowBox[{"trajectories", ".", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"listElement", "[", "i", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "imin", ",", "imax"}], "}"}]}], "]"}]}], " ", 
+      "makes", " ", "this", " ", "easier"}], ",", " ", 
+     RowBox[{
+     "where", " ", "we", " ", "can", " ", "give", " ", "the", " ", "program", 
+      " ", "parameters", " ", "for", " ", "what", " ", "to", " ", "calculate",
+       " ", "in", " ", "each", " ", "list", " ", 
+      RowBox[{"element", ".", " ", "In"}], " ", "this", " ", "example"}], ",",
+      " ", 
+     RowBox[{
+      RowBox[{"we", "'"}], "re", " ", "fixing", " ", "a", " ", "point", " ", 
+      RowBox[{"(", 
+       RowBox[{
+       "in", " ", "the", " ", "middle", " ", "of", " ", "the", " ", "bottom", 
+        " ", "component"}], ")"}], " ", "and", " ", 
+      RowBox[{"we", "'"}], "re", " ", "calculating", " ", "orbits", " ", 
+      "that", " ", "start", " ", "with", " ", "different", " ", "angles", " ",
+       "from", " ", "that", " ", 
+      RowBox[{"point", ".", " ", "The"}], " ", "first", " ", "orbit", " ", 
+      "will", " ", "start", " ", "with", " ", "angle", " ", 
+      RowBox[{"Pi", "/", "30"}]}], ",", " ", 
+     RowBox[{"the", " ", "next", " ", "with", " ", 
+      RowBox[{"Pi", "/", "15"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"etc", ".", " ", "This"}], " ", "will", " ", "take", " ", 
+      "much", " ", "longer", " ", "than", " ", "calculating", " ", "the", " ",
+       "single", " ", "orbit"}], ",", " ", 
+     RowBox[{
+     "but", " ", "it", " ", "can", " ", "be", " ", "sped", " ", "up", " ", 
+      "with", " ", 
+      RowBox[{"Parallelize", ".", " ", "Computations"}], " ", "wrapped", " ", 
+      "with", " ", "Parallelize", " ", "return", " ", "the", " ", "same", " ",
+       "value"}], ",", " ", 
+     RowBox[{
+     "but", " ", "the", " ", "utilize", " ", "multiple", " ", "cores", " ", 
+      "on", " ", "the", " ", 
+      RowBox[{"machine", ".", " ", "Since"}], " ", "each", " ", "orbit", " ", 
+      "is", " ", "independent", " ", "of", " ", "the", " ", "others"}], ",", 
+     " ", 
+     RowBox[{
+     "we", " ", "are", " ", "free", " ", "to", " ", "use", " ", "Parallelize",
+       " ", "without", " ", "worrying", " ", "about", " ", "the", " ", 
+      "calculation", " ", "of", " ", "one", " ", "interfering", " ", "with", 
+      " ", "the", " ", "calculation", " ", "of", " ", 
+      RowBox[{"another", ".", " ", "This"}], " ", "will", " ", "print", " ", 
+      "out", " ", "a", " ", "lot", " ", "more", " ", "errors"}], ",", " ", 
+     RowBox[{"and", " ", "a", " ", "lot", " ", "more", " ", "progress", " ", 
+      RowBox[{"numbers", ".", " ", "Sorry", ".", " ", "Still"}]}], ",", " ", 
+     RowBox[{
+     "as", " ", "long", " ", "as", " ", "the", " ", "numbers", " ", 
+      "continue", " ", "to", " ", "go", " ", "up"}], ",", " ", 
+     RowBox[{
+      RowBox[{"we", "'"}], "re", " ", "in", " ", "good", " ", 
+      RowBox[{"shape", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"multipleOrbits", "=", 
+     RowBox[{"Parallelize", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"guessTrajectoryListFinal", "[", 
+         RowBox[{
+          RowBox[{"geodesicSolve", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"t", "/.", 
+              RowBox[{"boundaryInt", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ")"}], ",", "0", ",", 
+            RowBox[{
+             RowBox[{"Pi", "/", "30"}], "*", "i"}]}], "]"}], ",", "150", ",", 
+          "tutorialBoundaries"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "can", " ", "use", " ", "the", " ", "result", " ", "of", " ", 
+      "this", " ", "to", " ", "get", " ", "nice", " ", "pictures", " ", "of", 
+      " ", "the", " ", "phase", " ", "space"}], ",", " ", 
+     RowBox[{"as", " ", "shown", " ", 
+      RowBox[{"below", ".", " ", "Notice"}], " ", "that", " ", "any", " ", 
+      "element", " ", "of", " ", "the", " ", "list", " ", "multipleOrbits", 
+      " ", "has", " ", "the", " ", "same", " ", "type", " ", "as", " ", 
+      "makeTrajectories", " ", "above"}], ",", " ", 
+     RowBox[{
+     "so", " ", "we", " ", "can", " ", "get", " ", "3", "D", " ", "plots", 
+      " ", "of", " ", "any", " ", "orbit", " ", "by", " ", "using", " ", 
+      RowBox[{
+       RowBox[{"TrajectoryPictures", "[", 
+        RowBox[{"multipleOrbits", "[", 
+         RowBox[{"[", "index", "]"}], "]"}], "]"}], "."}]}]}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"MakeAndPrintPhaseSpaceMultiple", "[", 
+    RowBox[{"multipleOrbits", ",", "tutorialBoundaries"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.679332910704872*^9, 3.679333031181378*^9}, {
+  3.679333076095561*^9, 3.6793331226715107`*^9}, {3.6793331672846394`*^9, 
+  3.679333185474246*^9}, {3.679333217899081*^9, 3.679333298050121*^9}, {
+  3.6793333340089617`*^9, 3.6793334817647223`*^9}, {3.6793335149364805`*^9, 
+  3.6793338363315153`*^9}, {3.679334371505225*^9, 3.6793348373828344`*^9}, {
+  3.679335141874879*^9, 3.6793351548001356`*^9}, {3.679335202364962*^9, 
+  3.679335257770912*^9}, {3.6793353127621727`*^9, 3.6793353487067747`*^9}, {
+  3.6793354420357084`*^9, 3.6793361869437675`*^9}, {3.679336242144929*^9, 
+  3.679337015485877*^9}, {3.6793370533561273`*^9, 3.679337337968642*^9}, {
+  3.6793624524104667`*^9, 3.6793624867175703`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"From", " ", "our", " ", "list", " ", "of", " ", "trajectories"}],
+     ",", " ", 
+    RowBox[{
+    "we", " ", "can", " ", "construct", " ", "the", " ", "list", " ", "of", 
+     " ", "matrices", " ", "defining", " ", "the", " ", "derivative", " ", 
+     "of", " ", "the", " ", "billiard", " ", 
+     RowBox[{"flow", ".", " ", "Matrices"}], " ", "will", " ", "be", " ", 
+     "alternatingly", " ", "matrices", " ", "for", " ", "a", " ", "geodesic", 
+     " ", "flow", " ", "and", " ", "a", " ", 
+     RowBox[{"reflection", ".", " ", "Importantly"}]}], ",", " ", 
+    RowBox[{
+    "we", " ", "can", " ", "get", " ", "the", " ", "trace", " ", "of", " ", 
+     "the", " ", "matrix", " ", "product", " ", 
+     RowBox[{"easily", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"trace", "=", 
+    RowBox[{"TraceOfMatrices", "[", 
+     RowBox[{"getSequenceOfMatrices", "[", "makeTrajectories", "]"}], "]"}]}],
+    ";"}]}]], "Input",
+ CellChangeTimes->{{3.6793605399732656`*^9, 3.679360572104595*^9}, {
+  3.6793609476488094`*^9, 3.6793609589905987`*^9}, {3.679361016365448*^9, 
+  3.6793610331207857`*^9}, {3.679361133942372*^9, 3.6793612649380617`*^9}, {
+  3.6793619233545513`*^9, 3.6793619268023567`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Suppose", " ", "we", " ", "let", " ", "our", " ", "computer", " ", "do", 
+     " ", "the", " ", "hard", " ", "work", " ", "of", " ", "calculating", " ",
+      "a", " ", "large", " ", "number", " ", "of", " ", "trajectories"}], ",",
+     " ", 
+    RowBox[{
+    "but", " ", "we", " ", "wish", " ", "to", " ", "shut", " ", "our", " ", 
+     "machine", " ", "down", " ", "for", " ", "the", " ", "weekend", " ", 
+     "without", " ", "losing", " ", "all", " ", "this", " ", "valuable", " ", 
+     RowBox[{"information", ".", " ", "Luckily"}]}], ",", " ", 
+    RowBox[{
+    "we", " ", "can", " ", "save", " ", "the", " ", "information", " ", "in", 
+     " ", "a", " ", "file", " ", "and", " ", "recall", " ", "it", " ", 
+     RowBox[{"later", ".", " ", "Unfortunately"}]}], ",", " ", 
+    RowBox[{
+    "saving", " ", "a", " ", "whole", " ", "orbit", " ", "with", " ", "all", 
+     " ", "its", " ", "information", " ", "is", " ", "too", " ", "much", " ", 
+     "information", " ", "for", " ", "the", " ", "computer", " ", "to", " ", 
+     "handle"}], ",", " ", 
+    RowBox[{
+    "as", " ", "each", " ", "interpolating", " ", "function", " ", "is", " ", 
+     "roughly", " ", "1", "Mb", " ", "of", " ", 
+     RowBox[{"information", ".", " ", "We"}], " ", "opt", " ", "to", " ", 
+     "compress", " ", "our", " ", "data", " ", "substantially"}], ",", " ", 
+    RowBox[{
+    "and", " ", "it", " ", "will", " ", "be", " ", "quick", " ", "to", " ", 
+     "recover", " ", 
+     RowBox[{"later", ".", " ", "After"}], " ", "this"}], ",", " ", 
+    RowBox[{
+    "we", " ", "store", " ", "the", " ", "data", " ", "in", " ", "a", " ", 
+     "file", " ", "for", " ", "later", " ", 
+     RowBox[{"use", ".", " ", "We"}], " ", "need", " ", "to", " ", "pick", 
+     " ", "a", " ", "location", " ", "to", " ", "put", " ", "our", " ", "new",
+      " ", "file"}], ",", " ", 
+    RowBox[{
+    "and", " ", "the", " ", "location", " ", "of", " ", "the", " ", 
+     "notebook", " ", "is", " ", "a", " ", "suitable", " ", "choice"}], ",", 
+    " ", 
+    RowBox[{
+    "so", " ", "we", " ", "change", " ", "the", " ", "directory", " ", "to", 
+     " ", "the", " ", 
+     RowBox[{"notebook", "'"}], "s", " ", 
+     RowBox[{"directory", ".", " ", "\"\<.m\>\""}], " ", "is", " ", "the", 
+     " ", "typical", " ", "choice", " ", "of", " ", "filetype", " ", "for", 
+     " ", "such", " ", 
+     RowBox[{"files", ".", " ", "The"}], " ", "new", " ", "file", " ", 
+     "simply", " ", "contains", " ", "the", " ", "text", " ", "of", " ", 
+     "the", " ", "value", " ", "we", " ", "stored"}], ",", " ", 
+    RowBox[{
+    "as", " ", "if", " ", "we", " ", "had", " ", "printed", " ", "it", " ", 
+     "to", " ", "the", " ", 
+     RowBox[{"screen", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"compressedSingleOrbit", "=", 
+     RowBox[{"CompressOrbit", "[", "makeTrajectories", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "compressedSingleOrbit", " ", ">>", " ", 
+    "\"\<tutorialSingleOrbit.m\>\""}]}]}]], "Input",
+ CellChangeTimes->{{3.679361932061751*^9, 3.679362382867119*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Now", " ", 
+     RowBox[{"we", "'"}], "re", " ", "back", " ", "and", " ", "ready", " ", 
+     "to", " ", "pull", " ", "up", " ", "our", " ", "information", " ", 
+     "from", " ", 
+     RowBox[{"earlier", ".", " ", "We"}], " ", "can", " ", "pull", " ", "it", 
+     " ", "out", " ", "of", " ", "the", " ", "file", " ", "much", " ", "the", 
+     " ", "same", " ", "way", " ", "we", " ", "put", " ", "it", " ", 
+     RowBox[{"in", ".", " ", "Decompressing"}], " ", "is", " ", "also", " ", 
+     "straightforward"}], ",", " ", 
+    RowBox[{"we", " ", "only", " ", "need", " ", "the", " ", "boundary", " ", 
+     RowBox[{"list", ".", " ", "Reinitializing"}], " ", "the", " ", 
+     "boundary", " ", "list", " ", "should", " ", "be", " ", 
+     RowBox[{"quick", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"compressedSingleOrbit", "=", 
+    RowBox[{"<<", "\"\<tutorialSingleOrbit.m\>\""}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"makeTrajectories", "=", 
+     RowBox[{"DecompressOrbit", "[", 
+      RowBox[{"compressedSingleOrbit", ",", "tutorialBoundaries"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "are", " ", "now", " ", "back", " ", "to", " ", "where", " ", 
+      "we", " ", "were"}], ",", " ", 
+     RowBox[{
+     "and", " ", "we", " ", "can", " ", "proceed", " ", "with", " ", "data", 
+      " ", 
+      RowBox[{"manipulation", "."}]}]}], "*)"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6793623858737125`*^9, 3.67936241569849*^9}, {
+  3.679362502536578*^9, 3.679362587405154*^9}, {3.6793626679586477`*^9, 
+  3.6793627581240745`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "It", " ", "is", " ", "also", " ", "easy", " ", "to", " ", "compress", " ",
+     "and", " ", "decompress", " ", "multiple", " ", "orbits", " ", "using", 
+    " ", 
+    RowBox[{"Map", "."}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"compressedMultipleOrbits", "=", 
+     RowBox[{"CompressOrbit", "/@", "multipleOrbits"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "compressedMultipleOrbits", ">>", "\"\<tutorialMultipleOrbits.m\>\""}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.679362766583869*^9, 3.6793628834888053`*^9}, 
+   3.6793629627755613`*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"compressedMultipleOrbits", "=", 
+     RowBox[{"<<", "\"\<tutorialMultipleOrbits.m\>\""}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"multipleOrbits", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"DecompressOrbit", "[", 
+        RowBox[{"#", ",", "tutorialBoundaries"}], "]"}], "&"}], "/@", 
+      "compressedMultipleOrbits"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.679362885726906*^9, 3.679362958997422*^9}}]
+},
+WindowSize->{1600, 817},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10319, 231, 652, "Input"],
+Cell[10880, 253, 17979, 361, 1232, "Input"],
+Cell[28862, 616, 1352, 27, 132, "Input"],
+Cell[30217, 645, 3344, 69, 252, "Input"],
+Cell[33564, 716, 1794, 38, 192, "Input"],
+Cell[35361, 756, 821, 22, 112, "Input"],
+Cell[36185, 780, 522, 14, 72, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
